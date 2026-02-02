@@ -1,0 +1,394 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import { getFeaturedPosts } from '@lib/sanityQueries';
+
+// Fetch featured posts for the preview section
+let featuredPosts = [];
+try {
+  featuredPosts = await getFeaturedPosts(3);
+} catch (error) {
+  console.error('Failed to fetch featured posts:', error);
+}
+
+// Format date helper
+function formatDate(dateString: string): string {
+  return new Date(dateString).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+}
+
+// Check if date is valid
+function isValidDate(dateString: string | undefined | null): boolean {
+  if (!dateString) return false;
+  const date = new Date(dateString);
+  return !isNaN(date.getTime());
+}
+---
+
+<BaseLayout 
+  title="Jakub Barak | Learning, Self-Improvement & Polymathy" 
+  description="Explore ideas at the intersection of learning, self-improvement, and polymathy. Join me on a journey to build knowledge across domains and create meaningful impact."
+  showNewsletter={true}
+>
+  <!-- Hero Section -->
+  <section class="relative overflow-hidden bg-gradient-to-b from-gray-50 to-white dark:from-gray-800 dark:to-gray-900">
+    <div class="absolute inset-0 bg-grid-pattern opacity-5"></div>
+    <div class="relative mx-auto max-w-6xl px-4 py-20 sm:py-28 lg:py-32">
+      <div class="flex flex-col items-center text-center">
+        <!-- Badge -->
+        <div class="mb-6 inline-flex items-center rounded-full border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 px-4 py-1.5 text-sm text-gray-600 dark:text-gray-400 shadow-sm">
+          <span class="mr-2 h-2 w-2 rounded-full bg-green-500 animate-pulse"></span>
+          Building in public
+        </div>
+        
+        <!-- Main Headline -->
+        <h1 class="text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-5xl md:text-6xl lg:text-7xl text-balance">
+          Master the Art of
+          <span class="bg-gradient-to-r from-gray-600 via-gray-800 to-gray-600 dark:from-gray-300 dark:via-white dark:to-gray-300 bg-clip-text text-transparent">
+            Continuous Learning
+          </span>
+        </h1>
+        
+        <!-- Subheadline -->
+        <p class="mt-6 max-w-2xl text-lg text-gray-600 dark:text-gray-400 sm:text-xl leading-relaxed">
+          Exploring the intersections of <strong class="text-gray-900 dark:text-white">learning</strong>, 
+          <strong class="text-gray-900 dark:text-white">self-improvement</strong>, and 
+          <strong class="text-gray-900 dark:text-white">polymathy</strong>. 
+          Ideas, insights, and tools for those who refuse to be defined by a single expertise.
+        </p>
+        
+        <!-- CTA Buttons -->
+        <div class="mt-10 flex flex-col sm:flex-row items-center gap-4">
+          <a
+            href="/blog"
+            class="group rounded-xl bg-gray-900 dark:bg-white px-8 py-4 text-base font-semibold text-white dark:text-gray-900 shadow-lg hover:bg-gray-700 dark:hover:bg-gray-200 transition-all hover:shadow-xl hover:-translate-y-0.5"
+          >
+            Read the Blog
+            <span class="inline-block ml-2 transition-transform group-hover:translate-x-1">→</span>
+          </a>
+          <a
+            href="/about"
+            class="rounded-xl border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 px-8 py-4 text-base font-semibold text-gray-900 dark:text-white shadow-sm hover:border-gray-300 dark:hover:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all"
+          >
+            About Me
+          </a>
+        </div>
+        
+        <!-- Trust Indicators -->
+        <div class="mt-16 flex flex-wrap items-center justify-center gap-8 text-sm text-gray-500 dark:text-gray-500">
+          <div class="flex items-center gap-2">
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+            </svg>
+            <span>Deep dives</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+            </svg>
+            <span>Practical insights</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+            <span>Actionable content</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Posts Section -->
+  <section class="py-20 bg-white dark:bg-gray-900">
+    <div class="mx-auto max-w-6xl px-4">
+      <!-- Section Header -->
+      <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-12">
+        <div>
+          <p class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">
+            From the Blog
+          </p>
+          <h2 class="text-3xl font-bold text-gray-900 dark:text-white sm:text-4xl">
+            Latest Insights
+          </h2>
+        </div>
+        <a 
+          href="/blog" 
+          class="mt-4 sm:mt-0 inline-flex items-center text-sm font-semibold text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
+        >
+          View all posts
+          <svg class="ml-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+        </a>
+      </div>
+
+      <!-- Posts Grid -->
+      {featuredPosts.length > 0 ? (
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {featuredPosts.map((post) => (
+            <article class="group flex flex-col bg-gray-50 dark:bg-gray-800 rounded-2xl overflow-hidden border border-gray-100 dark:border-gray-700 hover:border-gray-200 dark:hover:border-gray-600 transition-all hover:shadow-lg">
+              <!-- Post Image -->
+              <div class="relative aspect-[16/10] bg-gray-200 dark:bg-gray-700 overflow-hidden">
+                {post.featuredImage?.asset ? (
+                  <div class="absolute inset-0 bg-gradient-to-br from-gray-300 to-gray-400 dark:from-gray-600 dark:to-gray-700" />
+                ) : (
+                  <div class="absolute inset-0 bg-gradient-to-br from-gray-300 to-gray-400 dark:from-gray-600 dark:to-gray-700 flex items-center justify-center">
+                    <svg class="h-12 w-12 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+                    </svg>
+                  </div>
+                )}
+              </div>
+              
+              <!-- Post Content -->
+              <div class="flex flex-col flex-1 p-6">
+                <!-- Categories -->
+                {post.categories && post.categories.length > 0 && (
+                  <div class="flex flex-wrap gap-2 mb-3">
+                    {post.categories.slice(0, 2).map((category) => (
+                      <span class="text-xs font-medium text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-700 px-2.5 py-1 rounded-full">
+                        {category.title}
+                      </span>
+                    ))}
+                  </div>
+                )}
+                
+                <!-- Title -->
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2 group-hover:text-gray-600 dark:group-hover:text-gray-300 transition-colors line-clamp-2">
+                  <a href={`/blog/${post.slug.current}`} class="relative block after:absolute after:inset-0">
+                    {post.title}
+                  </a>
+                </h3>
+                
+                <!-- Excerpt -->
+                {post.excerpt && (
+                  <p class="text-sm text-gray-600 dark:text-gray-400 mb-4 line-clamp-2 flex-1">
+                    {post.excerpt}
+                  </p>
+                )}
+                
+                <!-- Meta -->
+                <div class="flex items-center justify-between text-xs text-gray-500 dark:text-gray-500 mt-auto pt-4 border-t border-gray-100 dark:border-gray-700">
+                  {isValidDate(post.publishedAt) ? (
+                    <time datetime={post.publishedAt}>
+                      {formatDate(post.publishedAt)}
+                    </time>
+                  ) : (
+                    <span>—</span>
+                  )}
+                  <span class="flex items-center">
+                    Read more
+                    <svg class="ml-1 h-3 w-3 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                  </span>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      ) : (
+        <!-- Empty State -->
+        <div class="text-center py-16 bg-gray-50 dark:bg-gray-800 rounded-2xl border border-gray-100 dark:border-gray-700">
+          <svg class="mx-auto h-12 w-12 text-gray-400 dark:text-gray-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+          </svg>
+          <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">No posts yet</h3>
+          <p class="text-gray-600 dark:text-gray-400">Check back soon for new content!</p>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <!-- Topics Section -->
+  <section class="py-20 bg-gray-50 dark:bg-gray-800">
+    <div class="mx-auto max-w-6xl px-4">
+      <div class="text-center mb-16">
+        <p class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">
+          What I Write About
+        </p>
+        <h2 class="text-3xl font-bold text-gray-900 dark:text-white sm:text-4xl">
+          Core Themes
+        </h2>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Learning -->
+        <div class="group bg-white dark:bg-gray-900 rounded-2xl p-8 border border-gray-100 dark:border-gray-700 hover:border-gray-200 dark:hover:border-gray-600 transition-all hover:shadow-lg">
+          <div class="w-14 h-14 rounded-xl bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+            <svg class="h-7 w-7 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-3">Learning</h3>
+          <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
+            Meta-learning strategies, effective study techniques, and the science of acquiring new skills faster. How to learn anything efficiently.
+          </p>
+        </div>
+
+        <!-- Self-Improvement -->
+        <div class="group bg-white dark:bg-gray-900 rounded-2xl p-8 border border-gray-100 dark:border-gray-700 hover:border-gray-200 dark:hover:border-gray-600 transition-all hover:shadow-lg">
+          <div class="w-14 h-14 rounded-xl bg-green-100 dark:bg-green-900/30 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+            <svg class="h-7 w-7 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-3">Self-Improvement</h3>
+          <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
+            Habits, mindset, and systems for personal growth. Building sustainable routines that compound over time into meaningful change.
+          </p>
+        </div>
+
+        <!-- Polymathy -->
+        <div class="group bg-white dark:bg-gray-900 rounded-2xl p-8 border border-gray-100 dark:border-gray-700 hover:border-gray-200 dark:hover:border-gray-600 transition-all hover:shadow-lg">
+          <div class="w-14 h-14 rounded-xl bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+            <svg class="h-7 w-7 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-3">Polymathy</h3>
+          <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
+            The power of cross-domain expertise. How connecting ideas from different fields creates unique insights and innovative solutions.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Future Products Section -->
+  <section class="py-20 bg-white dark:bg-gray-900">
+    <div class="mx-auto max-w-6xl px-4">
+      <div class="text-center mb-16">
+        <p class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">
+          Coming Soon
+        </p>
+        <h2 class="text-3xl font-bold text-gray-900 dark:text-white sm:text-4xl">
+          Future Products
+        </h2>
+        <p class="mt-4 text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+          I'm working on resources to help you accelerate your learning journey. Join the newsletter to be the first to know.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <!-- E-Books Card -->
+        <div class="relative group overflow-hidden bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 rounded-2xl p-8 lg:p-10 border border-amber-100 dark:border-amber-800/30">
+          <div class="absolute top-4 right-4">
+            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-amber-100 dark:bg-amber-800/40 text-amber-700 dark:text-amber-300">
+              In Development
+            </span>
+          </div>
+          <div class="w-16 h-16 rounded-2xl bg-amber-100 dark:bg-amber-800/40 flex items-center justify-center mb-6">
+            <svg class="h-8 w-8 text-amber-600 dark:text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+            </svg>
+          </div>
+          <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-3">E-Books & Guides</h3>
+          <p class="text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
+            Comprehensive guides on learning strategies, productivity systems, and cross-disciplinary skill development. Distilled knowledge from years of research and experimentation.
+          </p>
+          <ul class="space-y-3">
+            <li class="flex items-center text-sm text-gray-600 dark:text-gray-400">
+              <svg class="mr-3 h-5 w-5 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              Meta-Learning Masterclass
+            </li>
+            <li class="flex items-center text-sm text-gray-600 dark:text-gray-400">
+              <svg class="mr-3 h-5 w-5 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              The Polymath's Playbook
+            </li>
+            <li class="flex items-center text-sm text-gray-600 dark:text-gray-400">
+              <svg class="mr-3 h-5 w-5 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              Systems for Sustainable Growth
+            </li>
+          </ul>
+        </div>
+
+        <!-- Software Card -->
+        <div class="relative group overflow-hidden bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-2xl p-8 lg:p-10 border border-blue-100 dark:border-blue-800/30">
+          <div class="absolute top-4 right-4">
+            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 dark:bg-blue-800/40 text-blue-700 dark:text-blue-300">
+              Coming Later
+            </span>
+          </div>
+          <div class="w-16 h-16 rounded-2xl bg-blue-100 dark:bg-blue-800/40 flex items-center justify-center mb-6">
+            <svg class="h-8 w-8 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+            </svg>
+          </div>
+          <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-3">Software & Tools</h3>
+          <p class="text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
+            Digital tools designed to enhance your learning workflow and track your progress across multiple domains. Built with the polymath mindset in mind.
+          </p>
+          <ul class="space-y-3">
+            <li class="flex items-center text-sm text-gray-600 dark:text-gray-400">
+              <svg class="mr-3 h-5 w-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              Learning Progress Tracker
+            </li>
+            <li class="flex items-center text-sm text-gray-600 dark:text-gray-400">
+              <svg class="mr-3 h-5 w-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              Knowledge Connection Mapper
+            </li>
+            <li class="flex items-center text-sm text-gray-600 dark:text-gray-400">
+              <svg class="mr-3 h-5 w-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              Spaced Repetition System
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action Section -->
+  <section class="py-20 bg-gray-900 dark:bg-gray-950">
+    <div class="mx-auto max-w-4xl px-4 text-center">
+      <h2 class="text-3xl font-bold text-white sm:text-4xl mb-6">
+        Ready to Level Up Your Learning?
+      </h2>
+      <p class="text-lg text-gray-300 mb-10 max-w-2xl mx-auto">
+        Join the newsletter for weekly insights on learning, self-improvement, and building expertise across multiple domains. No spam, just actionable ideas.
+      </p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a
+          href="/blog"
+          class="w-full sm:w-auto rounded-xl bg-white px-8 py-4 text-base font-semibold text-gray-900 shadow-lg hover:bg-gray-100 transition-all hover:shadow-xl"
+        >
+          Start Reading
+        </a>
+        <a
+          href="/about"
+          class="w-full sm:w-auto rounded-xl border-2 border-gray-600 px-8 py-4 text-base font-semibold text-white hover:border-gray-500 hover:bg-gray-800 transition-all"
+        >
+          Learn More About Me
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .bg-grid-pattern {
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+  
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>

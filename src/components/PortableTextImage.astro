@@ -1,0 +1,133 @@
+---
+import { urlFor, getImageDimensions } from '@lib/sanity';
+
+interface Props {
+  value: {
+    asset?: {
+      _ref?: string;
+      metadata?: {
+        dimensions?: {
+          width: number;
+          height: number;
+          aspectRatio: number;
+        };
+        lqip?: string; // Low Quality Image Placeholder
+      };
+    };
+    alt?: string;
+    caption?: string;
+    hotspot?: {
+      x: number;
+      y: number;
+    };
+    crop?: {
+      top: number;
+      bottom: number;
+      left: number;
+      right: number;
+    };
+  };
+}
+
+const { value } = Astro.props;
+
+// Get image dimensions for proper aspect ratio
+const dimensions = value.asset?._ref ? getImageDimensions({ asset: value.asset }) : null;
+
+// Generate responsive image URLs for srcset
+const generateSrcSet = () => {
+  if (!value.asset?._ref) return '';
+  
+  const widths = [400, 600, 800, 1000, 1200, 1600];
+  
+  return widths
+    .map((width) => {
+      const url = urlFor(value)
+        .width(width)
+        .auto('format')
+        .quality(80)
+        .url();
+      return `${url} ${width}w`;
+    })
+    .join(', ');
+};
+
+// Build the default image URL (fallback for browsers without srcset support)
+const imageUrl = value.asset?._ref 
+  ? urlFor(value)
+      .width(1200)
+      .auto('format')
+      .quality(85)
+      .url() 
+  : null;
+
+// Generate a small placeholder for blur-up effect
+const placeholderUrl = value.asset?._ref
+  ? urlFor(value)
+      .width(20)
+      .blur(10)
+      .quality(30)
+      .auto('format')
+      .url()
+  : null;
+
+// Use LQIP if available, otherwise use generated placeholder
+const lqip = value.asset?.metadata?.lqip || placeholderUrl;
+
+const srcset = generateSrcSet();
+
+// Calculate aspect ratio for responsive sizing
+const aspectRatio = dimensions 
+  ? `${dimensions.width} / ${dimensions.height}` 
+  : '16 / 9';
+
+// Determine sizes attribute for responsive images
+const sizes = '(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 800px';
+---
+
+{imageUrl && (
+  <figure class="portable-text-image my-8">
+    <div 
+      class="relative overflow-hidden rounded-lg bg-gray-100 dark:bg-gray-800"
+      style={`aspect-ratio: ${aspectRatio};`}
+    >
+      {/* Blur placeholder background */}
+      {lqip && (
+        <img 
+          src={lqip}
+          alt=""
+          aria-hidden="true"
+          class="absolute inset-0 w-full h-full object-cover scale-110 blur-lg"
+          loading="eager"
+        />
+      )}
+      
+      {/* Main image with srcset for responsive loading */}
+      <img 
+        src={imageUrl}
+        srcset={srcset}
+        sizes={sizes}
+        alt={value.alt || ''}
+        loading="lazy"
+        decoding="async"
+        class="relative w-full h-full object-cover transition-opacity duration-300"
+        width={dimensions?.width || 1200}
+        height={dimensions?.height || 675}
+        onload="this.style.opacity=1;this.previousElementSibling&&(this.previousElementSibling.style.opacity=0)"
+        style="opacity: 0;"
+      />
+    </div>
+    
+    {value.caption && (
+      <figcaption class="mt-3 text-center text-sm text-gray-500 dark:text-gray-400 italic">
+        {value.caption}
+      </figcaption>
+    )}
+  </figure>
+)}
+
+<style>
+  .portable-text-image img {
+    transition: opacity 0.3s ease-in-out;
+  }
+</style>

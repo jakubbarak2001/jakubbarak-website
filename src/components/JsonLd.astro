@@ -1,0 +1,197 @@
+---
+/**
+ * JSON-LD Structured Data Component
+ * Generates schema.org structured data for SEO
+ */
+
+type JsonLdType = 
+  | 'WebSite'
+  | 'BlogPosting'
+  | 'Article'
+  | 'Person'
+  | 'Organization'
+  | 'BreadcrumbList';
+
+interface WebSiteSchema {
+  type: 'WebSite';
+  name: string;
+  url: string;
+  description?: string;
+  author?: PersonSchema;
+}
+
+interface PersonSchema {
+  type: 'Person';
+  name: string;
+  url?: string;
+  image?: string;
+  jobTitle?: string;
+  description?: string;
+  sameAs?: string[];
+}
+
+interface BlogPostingSchema {
+  type: 'BlogPosting';
+  headline: string;
+  description?: string;
+  image?: string | string[];
+  datePublished: string;
+  dateModified?: string;
+  author: PersonSchema;
+  publisher?: OrganizationSchema;
+  url: string;
+  mainEntityOfPage?: string;
+  keywords?: string[];
+  wordCount?: number;
+  articleSection?: string;
+}
+
+interface OrganizationSchema {
+  type: 'Organization';
+  name: string;
+  url?: string;
+  logo?: string;
+  sameAs?: string[];
+}
+
+interface BreadcrumbItem {
+  name: string;
+  url: string;
+}
+
+interface BreadcrumbListSchema {
+  type: 'BreadcrumbList';
+  items: BreadcrumbItem[];
+}
+
+type SchemaProps = 
+  | WebSiteSchema 
+  | PersonSchema 
+  | BlogPostingSchema 
+  | OrganizationSchema
+  | BreadcrumbListSchema;
+
+interface Props {
+  schema: SchemaProps | SchemaProps[];
+}
+
+const { schema } = Astro.props;
+
+// Helper to generate schema object
+function generateSchema(data: SchemaProps): Record<string, unknown> {
+  switch (data.type) {
+    case 'WebSite':
+      return {
+        '@context': 'https://schema.org',
+        '@type': 'WebSite',
+        name: data.name,
+        url: data.url,
+        description: data.description,
+        author: data.author ? generateSchema(data.author) : undefined,
+        potentialAction: {
+          '@type': 'SearchAction',
+          target: {
+            '@type': 'EntryPoint',
+            urlTemplate: `${data.url}blog?search={search_term_string}`,
+          },
+          'query-input': 'required name=search_term_string',
+        },
+      };
+
+    case 'Person':
+      return {
+        '@context': 'https://schema.org',
+        '@type': 'Person',
+        name: data.name,
+        url: data.url,
+        image: data.image,
+        jobTitle: data.jobTitle,
+        description: data.description,
+        sameAs: data.sameAs,
+      };
+
+    case 'BlogPosting':
+      return {
+        '@context': 'https://schema.org',
+        '@type': 'BlogPosting',
+        headline: data.headline,
+        description: data.description,
+        image: data.image,
+        datePublished: data.datePublished,
+        dateModified: data.dateModified || data.datePublished,
+        author: generateSchema(data.author),
+        publisher: data.publisher ? generateSchema(data.publisher) : {
+          '@type': 'Organization',
+          name: 'Jakub Barak',
+          url: 'https://jakubbarak.com',
+          logo: {
+            '@type': 'ImageObject',
+            url: 'https://jakubbarak.com/og-image.png',
+          },
+        },
+        url: data.url,
+        mainEntityOfPage: {
+          '@type': 'WebPage',
+          '@id': data.mainEntityOfPage || data.url,
+        },
+        keywords: data.keywords?.join(', '),
+        wordCount: data.wordCount,
+        articleSection: data.articleSection,
+        inLanguage: 'en-US',
+      };
+
+    case 'Organization':
+      return {
+        '@context': 'https://schema.org',
+        '@type': 'Organization',
+        name: data.name,
+        url: data.url,
+        logo: data.logo ? {
+          '@type': 'ImageObject',
+          url: data.logo,
+        } : undefined,
+        sameAs: data.sameAs,
+      };
+
+    case 'BreadcrumbList':
+      return {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: data.items.map((item, index) => ({
+          '@type': 'ListItem',
+          position: index + 1,
+          name: item.name,
+          item: item.url,
+        })),
+      };
+
+    default:
+      return {};
+  }
+}
+
+// Handle single or multiple schemas
+const schemas = Array.isArray(schema) ? schema : [schema];
+const jsonLdObjects = schemas.map(generateSchema);
+
+// Clean undefined values from objects
+function cleanObject(obj: Record<string, unknown>): Record<string, unknown> {
+  const cleaned: Record<string, unknown> = {};
+  for (const [key, value] of Object.entries(obj)) {
+    if (value !== undefined && value !== null) {
+      if (typeof value === 'object' && !Array.isArray(value)) {
+        cleaned[key] = cleanObject(value as Record<string, unknown>);
+      } else {
+        cleaned[key] = value;
+      }
+    }
+  }
+  return cleaned;
+}
+
+const cleanedSchemas = jsonLdObjects.map(cleanObject);
+---
+
+{cleanedSchemas.map((schemaObj) => (
+  <script type="application/ld+json" set:html={JSON.stringify(schemaObj, null, 0)} />
+))}
