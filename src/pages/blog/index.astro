@@ -75,7 +75,7 @@ function getPageNumbers(current: number, total: number): (number | string)[] {
 const pageNumbers = getPageNumbers(currentPage, paginatedPosts.totalPages);
 
 // Get active category name
-const activeCategory = categories.find(c => c.slug.current === currentCategory);
+const activeCategory = categories.find(c => c.slug?.current === currentCategory);
 ---
 
 <BaseLayout 
@@ -153,10 +153,10 @@ const activeCategory = categories.find(c => c.slug.current === currentCategory);
           
           {categories.map((category) => (
             <a
-              href={buildUrl({ category: category.slug.current, search: currentSearch })}
+              href={buildUrl({ category: category.slug?.current || '', search: currentSearch })}
               class:list={[
                 'px-4 py-2 text-sm font-medium rounded-full transition-colors',
-                currentCategory === category.slug.current
+                currentCategory === category.slug?.current
                   ? 'bg-gray-900 dark:bg-white text-white dark:text-gray-900'
                   : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700'
               ]}

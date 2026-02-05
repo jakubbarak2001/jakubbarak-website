@@ -16,7 +16,7 @@ export async function GET(context: APIContext) {
     
     // RSS items from blog posts
     items: posts.map((post) => {
-      const postUrl = new URL(`/blog/${post.slug.current}`, siteUrl).href;
+      const postUrl = new URL(`/blog/${post.slug?.current || ''}`, siteUrl).href;
       const imageUrl = post.featuredImage?.asset 
         ? urlFor(post.featuredImage).width(1200).height(630).auto('format').url()
         : undefined;

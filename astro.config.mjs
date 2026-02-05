@@ -21,29 +21,10 @@ export default defineConfig({
       useCdn: true,
       apiVersion: '2026-02-02',
     }),
-    sitemap({
-      // Customize sitemap generation
-      changefreq: 'weekly',
-      priority: 0.7,
-      lastmod: new Date(),
-      // Filter out any pages you don't want in the sitemap
-      filter: (page) => !page.includes('/test-'),
-      // Custom serialization for specific pages
-      serialize: (item) => {
-        // Boost priority for main pages
-        if (item.url.endsWith('/')) {
-          item.priority = 1.0;
-        } else if (item.url.includes('/blog/') && !item.url.endsWith('/blog/')) {
-          // Blog posts
-          item.changefreq = 'monthly';
-          item.priority = 0.8;
-        } else if (item.url.includes('/blog') || item.url.includes('/about')) {
-          // Main sections
-          item.priority = 0.9;
-        }
-        return item;
-      },
-    }),
+    // Sitemap temporarily disabled due to build issue
+    // sitemap({
+    //   filter: (page) => !page.includes('/test-'),
+    // }),
   ],
   site: 'https://jakubbarak.com',
   compressHTML: true,

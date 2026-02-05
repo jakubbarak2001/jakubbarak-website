@@ -43,7 +43,7 @@ const imageUrl = post.featuredImage?.asset
 >
   <!-- Post Image -->
   <a 
-    href={`/blog/${post.slug.current}`}
+    href={`/blog/${post.slug?.current || ''}`}
     class:list={[
       'relative overflow-hidden bg-gray-200 dark:bg-gray-700 shrink-0',
       featured ? 'md:w-1/2 aspect-[16/10] md:aspect-auto' : 'aspect-[16/10]'
@@ -75,7 +75,7 @@ const imageUrl = post.featuredImage?.asset
       <div class="flex flex-wrap gap-2 mb-3">
         {post.categories.slice(0, 2).map((category) => (
           <a 
-            href={`/blog?category=${category.slug.current}`}
+            href={`/blog?category=${category.slug?.current || ''}`}
             class="text-xs font-medium text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-700 px-2.5 py-1 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
           >
             {category.title}
@@ -89,7 +89,7 @@ const imageUrl = post.featuredImage?.asset
       'font-semibold text-gray-900 dark:text-white mb-2 group-hover:text-gray-600 dark:group-hover:text-gray-300 transition-colors',
       featured ? 'text-xl md:text-2xl line-clamp-3' : 'text-lg line-clamp-2'
     ]}>
-      <a href={`/blog/${post.slug.current}`}>
+      <a href={`/blog/${post.slug?.current || ''}`}>
         {post.title}
       </a>
     </h3>

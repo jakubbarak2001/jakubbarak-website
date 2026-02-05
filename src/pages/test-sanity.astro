@@ -92,7 +92,7 @@ try {
                         <p class="text-gray-600 text-sm mt-1">{post.excerpt}</p>
                       )}
                       <div class="flex items-center gap-4 mt-2 text-sm text-gray-500">
-                        <span>Slug: <code class="bg-gray-100 px-1">{post.slug.current}</code></span>
+                        <span>Slug: <code class="bg-gray-100 px-1">{post.slug?.current || 'N/A'}</code></span>
                         <span>Published: {new Date(post.publishedAt).toLocaleDateString()}</span>
                       </div>
                       {post.categories && post.categories.length > 0 && (
