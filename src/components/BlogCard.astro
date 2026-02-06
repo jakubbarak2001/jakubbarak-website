@@ -129,7 +129,9 @@ const imageUrl = post.featuredImage?.asset
         
         {/* Date */}
         <time datetime={post.publishedAt}>
-          {formatDate(post.publishedAt)}
+          {post.publishedAt && !Number.isNaN(new Date(post.publishedAt).getTime())
+            ? formatDate(post.publishedAt)
+            : '—'}
         </time>
       </div>
       
