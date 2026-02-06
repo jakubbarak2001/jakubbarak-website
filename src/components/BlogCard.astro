@@ -1,5 +1,4 @@
----
-import { urlFor } from '@lib/sanity';
+import { urlFor, getLocaleString } from '@lib/sanity';
 import type { BlogPostPreview } from '@types/sanity';
 
 interface Props {
@@ -32,6 +31,9 @@ function getReadingTime(excerpt?: string): string {
 const imageUrl = post.featuredImage?.asset 
   ? urlFor(post.featuredImage).width(featured ? 1200 : 800).height(featured ? 600 : 450).auto('format').url()
   : null;
+
+// Localized author name
+const authorName = getLocaleString(post.author?.name) || 'Jakub Barák';
 ---
 
 <article 
@@ -78,7 +80,7 @@ const imageUrl = post.featuredImage?.asset
             href={`/blog?category=${category.slug?.current || ''}`}
             class="text-xs font-medium text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-700 px-2.5 py-1 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
           >
-            {category.title}
+            {getLocaleString(category.title)}
           </a>
         ))}
       </div>
@@ -113,17 +115,17 @@ const imageUrl = post.featuredImage?.asset
             {post.author.image?.asset ? (
               <img 
                 src={urlFor(post.author.image).width(32).height(32).auto('format').url()}
-                alt={post.author.name}
+                alt={authorName}
                 class="w-6 h-6 rounded-full object-cover"
               />
             ) : (
               <div class="w-6 h-6 rounded-full bg-gray-300 dark:bg-gray-600 flex items-center justify-center">
                 <span class="text-xs font-medium text-gray-600 dark:text-gray-400">
-                  {post.author.name.charAt(0).toUpperCase()}
+                  {authorName.charAt(0).toUpperCase()}
                 </span>
               </div>
             )}
-            <span class="hidden sm:inline">{post.author.name}</span>
+            <span class="hidden sm:inline">{authorName}</span>
           </div>
         )}
         

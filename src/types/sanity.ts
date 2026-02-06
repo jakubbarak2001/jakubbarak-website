@@ -1,6 +1,20 @@
 import type { PortableTextBlock as BasePortableTextBlock } from '@portabletext/types';
 
 /**
+ * Localized string field, e.g. { en: 'Title', cs: 'Nadpis' }
+ */
+export type LocaleString = {
+  [locale: string]: string | undefined;
+};
+
+/**
+ * Localized Portable Text field, e.g. { en: [...blocks], cs: [...blocks] }
+ */
+export type LocalePortableTextBlock = {
+  [locale: string]: BasePortableTextBlock[] | undefined;
+};
+
+/**
  * Sanity image asset reference
  */
 export interface SanityImageAsset {
@@ -54,9 +68,9 @@ export interface SanitySlug {
 export interface Author {
   _id: string;
   _type: 'author';
-  name: string;
+  name: LocaleString;
   slug?: SanitySlug;
-  bio?: string;
+  bio?: LocalePortableTextBlock;
   image?: SanityImage;
   socialLinks?: {
     twitter?: string;
@@ -72,17 +86,17 @@ export interface Author {
 export interface Category {
   _id: string;
   _type: 'category';
-  title: string;
+  title: LocaleString;
   slug: SanitySlug;
-  description?: string;
+  description?: LocaleString;
 }
 
 /**
  * SEO metadata object
  */
 export interface SeoMetadata {
-  metaTitle?: string;
-  metaDescription?: string;
+  metaTitle?: LocaleString;
+  metaDescription?: LocaleString;
   keywords?: string[];
   ogImage?: SanityImage;
 }
@@ -100,10 +114,10 @@ export interface BlogPost {
   _type: 'post';
   _createdAt: string;
   _updatedAt: string;
-  title: string;
+  title: LocaleString;
   slug: SanitySlug;
-  excerpt?: string;
-  content: PortableTextBlock[];
+  excerpt?: LocaleString;
+  content: LocalePortableTextBlock;
   publishedAt: string;
   author?: Author;
   categories?: Category[];
@@ -117,9 +131,9 @@ export interface BlogPost {
  */
 export interface BlogPostPreview {
   _id: string;
-  title: string;
+  title: LocaleString;
   slug: SanitySlug;
-  excerpt?: string;
+  excerpt?: LocaleString;
   publishedAt: string;
   featuredImage?: SanityImage;
   author?: Pick<Author, '_id' | 'name' | 'image'>;

@@ -3,6 +3,7 @@ import BaseLayout from '@layouts/BaseLayout.astro';
 import BlogCard from '@components/BlogCard.astro';
 import { getPaginatedPosts, getAllCategories } from '@lib/sanityQueries';
 import type { Category } from '@types/sanity';
+import { getLocaleString } from '@lib/sanity';
 
 // Get query parameters from URL
 const url = new URL(Astro.request.url);
@@ -76,10 +77,11 @@ const pageNumbers = getPageNumbers(currentPage, paginatedPosts.totalPages);
 
 // Get active category name
 const activeCategory = categories.find(c => c.slug?.current === currentCategory);
+const activeCategoryTitle = activeCategory ? getLocaleString(activeCategory.title) : '';
 ---
 
 <BaseLayout 
-  title={`Blog${activeCategory ? ` - ${activeCategory.title}` : ''}${currentPage > 1 ? ` - Page ${currentPage}` : ''}`}
+  title={`Blog${activeCategoryTitle ? ` - ${activeCategoryTitle}` : ''}${currentPage > 1 ? ` - Page ${currentPage}` : ''}`}
   description="Explore articles on learning, self-improvement, and polymathy. Deep dives into meta-learning, productivity systems, and building expertise across multiple domains."
 >
   <div class="py-12 md:py-20 bg-gradient-to-b from-gray-50 to-white dark:from-gray-800 dark:to-gray-900">
@@ -161,7 +163,7 @@ const activeCategory = categories.find(c => c.slug?.current === currentCategory)
                   : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700'
               ]}
             >
-              {category.title}
+              {getLocaleString(category.title)}
             </a>
           ))}
         </div>
@@ -188,7 +190,7 @@ const activeCategory = categories.find(c => c.slug?.current === currentCategory)
             
             {activeCategory && (
               <span class="inline-flex items-center gap-1 px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 text-sm rounded-full">
-                Category: {activeCategory.title}
+                Category: {activeCategoryTitle}
                 <a 
                   href={buildUrl({ search: currentSearch, page: 1 })}
                   class="ml-1 hover:text-green-900 dark:hover:text-green-100"

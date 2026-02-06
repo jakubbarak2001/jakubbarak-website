@@ -4,7 +4,13 @@ import PortableTextRenderer from '@components/PortableTextRenderer.astro';
 import BlogCard from '@components/BlogCard.astro';
 import JsonLd from '@components/JsonLd.astro';
 import { getPostBySlug, getAllPostSlugs, getFeaturedPosts } from '@lib/sanityQueries';
-import { urlFor, getImageDimensions } from '@lib/sanity';
+import {
+  urlFor,
+  getImageDimensions,
+  getLocaleString,
+  getLocalePortableText,
+  portableTextToPlainText,
+} from '@lib/sanity';
 import type { BlogPost, BlogPostPreview } from '@types/sanity';
 
 // Generate static paths for all blog posts
@@ -54,16 +60,26 @@ function getContentStats(content: any[]): { readingTime: string; wordCount: numb
   
   // Extract text from portable text blocks
   const text = content
-    .filter(block => block._type === 'block')
-    .map(block => block.children?.map((child: any) => child.text).join(' ') || '')
+    .filter((block) => block._type === 'block')
+    .map((block) => block.children?.map((child: any) => child.text).join(' ') || '')
     .join(' ');
   
-  const words = text.split(/\s+/).filter(word => word.length > 0).length;
+  const words = text.split(/\s+/).filter((word) => word.length > 0).length;
   const minutes = Math.max(1, Math.round(words / 200));
   return { readingTime: `${minutes} min read`, wordCount: words };
 }
 
-const contentStats = getContentStats(post.content);
+// Localized field helpers
+const localizedTitle = getLocaleString(post.title);
+const localizedExcerpt = getLocaleString(post.excerpt);
+const localizedMetaTitle = getLocaleString(post.seo?.metaTitle);
+const localizedMetaDescription = getLocaleString(post.seo?.metaDescription);
+const localizedContent = getLocalePortableText(post.content);
+const authorName = getLocaleString(post.author?.name) || 'Jakub Barák';
+const localizedAuthorBio = getLocalePortableText(post.author?.bio);
+const authorBioPlainText = portableTextToPlainText(localizedAuthorBio);
+
+const contentStats = getContentStats(localizedContent);
 
 // Get featured image URL
 const featuredImageUrl = post.featuredImage?.asset 
@@ -119,16 +135,19 @@ const pageUrl = new URL(`/blog/${post.slug?.current || slug}`, Astro.site || 'ht
 const breadcrumbItems = [
   { name: 'Home', url: Astro.site?.href || 'https://jakubbarak.com' },
   { name: 'Blog', url: new URL('/blog', Astro.site || 'https://jakubbarak.com').href },
-  { name: post.title, url: pageUrl },
+  { name: localizedTitle, url: pageUrl },
 ];
 
 // Get category for article section
-const articleSection = post.categories?.[0]?.title || 'Blog';
+const articleSection =
+  post.categories && post.categories.length > 0
+    ? getLocaleString(post.categories[0].title) || 'Blog'
+    : 'Blog';
 ---
 
 <BaseLayout 
-  title={post.seo?.metaTitle || post.title}
-  description={post.seo?.metaDescription || post.excerpt}
+  title={localizedMetaTitle || localizedTitle}
+  description={localizedMetaDescription || localizedExcerpt}
   image={ogImageUrl || undefined}
   ogType="article"
   publishedTime={post.publishedAt}
@@ -139,8 +158,8 @@ const articleSection = post.categories?.[0]?.title || 'Blog';
     schema={[
       {
         type: 'BlogPosting',
-        headline: post.title,
-        description: post.excerpt || post.seo?.metaDescription,
+        headline: localizedTitle,
+        description: localizedExcerpt || localizedMetaDescription,
         image: featuredImageUrl ? [featuredImageUrl, ogImageUrl].filter(Boolean) as string[] : undefined,
         datePublished: post.publishedAt,
         dateModified: post._updatedAt,
@@ -148,15 +167,15 @@ const articleSection = post.categories?.[0]?.title || 'Blog';
         mainEntityOfPage: pageUrl,
         wordCount: contentStats.wordCount,
         articleSection: articleSection,
-        keywords: post.seo?.keywords || post.categories?.map(c => c.title),
+        keywords: post.seo?.keywords || post.categories?.map((c) => getLocaleString(c.title)),
         author: {
           type: 'Person',
-          name: post.author?.name || 'Jakub Barák',
+          name: authorName,
           url: post.author?.slug?.current 
             ? new URL(`/author/${post.author.slug?.current}`, Astro.site || 'https://jakubbarak.com').href
             : Astro.site?.href || 'https://jakubbarak.com',
           image: authorImageUrl,
-          description: post.author?.bio,
+          description: authorBioPlainText || undefined,
           sameAs: authorSameAs.length > 0 ? authorSameAs : undefined,
         },
       },
@@ -190,7 +209,7 @@ const articleSection = post.categories?.[0]?.title || 'Blog';
                 href={`/blog?category=${category.slug?.current || ''}`}
                 class="text-sm font-medium text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-800 px-3 py-1 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
               >
-                {category.title}
+                {getLocaleString(category.title)}
               </a>
             ))}
           </div>
@@ -198,13 +217,13 @@ const articleSection = post.categories?.[0]?.title || 'Blog';
 
         <!-- Title -->
         <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 dark:text-white leading-tight mb-6">
-          {post.title}
+          {localizedTitle}
         </h1>
 
         <!-- Excerpt -->
         {post.excerpt && (
           <p class="text-xl text-gray-600 dark:text-gray-400 leading-relaxed mb-8">
-            {post.excerpt}
+            {localizedExcerpt}
           </p>
         )}
 
@@ -216,23 +235,23 @@ const articleSection = post.categories?.[0]?.title || 'Blog';
               {post.author.image?.asset ? (
                 <img 
                   src={urlFor(post.author.image).width(48).height(48).auto('format').url()}
-                  alt={post.author.name}
+                  alt={authorName}
                   class="w-10 h-10 rounded-full object-cover"
                 />
               ) : (
                 <div class="w-10 h-10 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
                   <span class="text-sm font-medium text-gray-600 dark:text-gray-400">
-                    {post.author.name.charAt(0).toUpperCase()}
+                    {authorName.charAt(0).toUpperCase()}
                   </span>
                 </div>
               )}
               <div>
                 <div class="font-medium text-gray-900 dark:text-white">
-                  {post.author.name}
+                  {authorName}
                 </div>
-                {post.author.bio && (
+                {authorBioPlainText && (
                   <div class="text-xs text-gray-500 dark:text-gray-500 line-clamp-1">
-                    {post.author.bio}
+                    {authorBioPlainText}
                   </div>
                 )}
               </div>
@@ -273,7 +292,7 @@ const articleSection = post.categories?.[0]?.title || 'Blog';
                 src={featuredImageUrl}
                 srcset={heroImageSrcset}
                 sizes={heroImageSizes}
-                alt={post.featuredImage?.alt || post.title}
+                alt={post.featuredImage?.alt || localizedTitle}
                 class="w-full h-full object-cover"
                 loading="eager"
                 decoding="async"
@@ -291,10 +310,10 @@ const articleSection = post.categories?.[0]?.title || 'Blog';
       )}
     </header>
 
-    <!-- Article Content -->
-    <div class="mx-auto max-w-3xl px-4">
-      <PortableTextRenderer content={post.content} class="article-content" />
-    </div>
+      <!-- Article Content -->
+      <div class="mx-auto max-w-3xl px-4">
+        <PortableTextRenderer content={localizedContent} class="article-content" />
+      </div>
 
     <!-- Article Footer -->
     <footer class="mt-16 mx-auto max-w-4xl px-4">
@@ -310,7 +329,7 @@ const articleSection = post.categories?.[0]?.title || 'Blog';
                 href={`/blog?category=${category.slug?.current || ''}`}
                 class="px-4 py-2 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 text-sm font-medium rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
               >
-                {category.title}
+                {getLocaleString(category.title)}
               </a>
             ))}
           </div>
@@ -324,13 +343,13 @@ const articleSection = post.categories?.[0]?.title || 'Blog';
             {post.author.image?.asset ? (
               <img 
                 src={urlFor(post.author.image).width(80).height(80).auto('format').url()}
-                alt={post.author.name}
+                alt={authorName}
                 class="w-16 h-16 sm:w-20 sm:h-20 rounded-full object-cover shrink-0"
               />
             ) : (
               <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center shrink-0">
                 <span class="text-xl font-medium text-gray-600 dark:text-gray-400">
-                  {post.author.name.charAt(0).toUpperCase()}
+                  {authorName.charAt(0).toUpperCase()}
                 </span>
               </div>
             )}
@@ -339,12 +358,12 @@ const articleSection = post.categories?.[0]?.title || 'Blog';
                 Written by
               </h3>
               <p class="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-                {post.author.name}
+                {authorName}
               </p>
-              {post.author.bio && (
-                <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
-                  {post.author.bio}
-                </p>
+              {localizedAuthorBio.length > 0 && (
+                <div class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+                  <PortableTextRenderer content={localizedAuthorBio} class="author-bio" />
+                </div>
               )}
               {post.author.socialLinks && (
                 <div class="flex items-center gap-3 mt-3">
@@ -414,7 +433,7 @@ const articleSection = post.categories?.[0]?.title || 'Blog';
         </h3>
         <div class="flex items-center gap-3">
           <a
-            href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=${encodeURIComponent(Astro.url.href)}`}
+            href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(localizedTitle)}&url=${encodeURIComponent(Astro.url.href)}`}
             target="_blank"
             rel="noopener noreferrer"
             class="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
@@ -425,7 +444,7 @@ const articleSection = post.categories?.[0]?.title || 'Blog';
             <span class="text-sm font-medium">Tweet</span>
           </a>
           <a
-            href={`https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(Astro.url.href)}&title=${encodeURIComponent(post.title)}`}
+            href={`https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(Astro.url.href)}&title=${encodeURIComponent(localizedTitle)}`}
             target="_blank"
             rel="noopener noreferrer"
             class="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
