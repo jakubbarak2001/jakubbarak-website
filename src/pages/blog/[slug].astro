@@ -8,7 +8,7 @@ import {
   urlFor,
   getImageDimensions,
   getLocaleString,
-  getLocalePortableText,
+  resolvePortableTextLocale,
   portableTextToPlainText,
 } from '@lib/sanity';
 import type { BlogPost, BlogPostPreview } from '@types/sanity';
@@ -74,9 +74,9 @@ const localizedTitle = getLocaleString(post.title);
 const localizedExcerpt = getLocaleString(post.excerpt);
 const localizedMetaTitle = getLocaleString(post.seo?.metaTitle);
 const localizedMetaDescription = getLocaleString(post.seo?.metaDescription);
-const localizedContent = getLocalePortableText(post.content);
+const localizedContent = resolvePortableTextLocale(post.content);
 const authorName = getLocaleString(post.author?.name) || 'Jakub Barák';
-const localizedAuthorBio = getLocalePortableText(post.author?.bio);
+const localizedAuthorBio = resolvePortableTextLocale(post.author?.bio);
 const authorBioPlainText = portableTextToPlainText(localizedAuthorBio);
 
 const contentStats = getContentStats(localizedContent);

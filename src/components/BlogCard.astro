@@ -32,6 +32,11 @@ const imageUrl = post.featuredImage?.asset
   ? urlFor(post.featuredImage).width(featured ? 1200 : 800).height(featured ? 600 : 450).auto('format').url()
   : null;
 
+// Localized strings for title, excerpt, and reading time
+const localizedTitle = getLocaleString(post.title);
+const localizedExcerpt = getLocaleString(post.excerpt || '');
+const localizedReadingTime = getReadingTime(localizedExcerpt);
+
 // Localized author name
 const authorName = getLocaleString(post.author?.name) || 'Jakub Barák';
 ---
@@ -54,7 +59,7 @@ const authorName = getLocaleString(post.author?.name) || 'Jakub Barák';
     {imageUrl ? (
       <img 
         src={imageUrl} 
-        alt={post.featuredImage?.alt || post.title}
+        alt={post.featuredImage?.alt || localizedTitle}
         class="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
         loading="lazy"
       />
@@ -92,17 +97,17 @@ const authorName = getLocaleString(post.author?.name) || 'Jakub Barák';
       featured ? 'text-xl md:text-2xl line-clamp-3' : 'text-lg line-clamp-2'
     ]}>
       <a href={`/blog/${post.slug?.current || ''}`}>
-        {post.title}
+        {localizedTitle}
       </a>
     </h3>
     
     <!-- Excerpt -->
-    {post.excerpt && (
+    {localizedExcerpt && (
       <p class:list={[
         'text-gray-600 dark:text-gray-400 mb-4 flex-1',
         featured ? 'text-base line-clamp-3' : 'text-sm line-clamp-2'
       ]}>
-        {post.excerpt}
+        {localizedExcerpt}
       </p>
     )}
     
@@ -138,7 +143,7 @@ const authorName = getLocaleString(post.author?.name) || 'Jakub Barák';
       </div>
       
       <span class="flex items-center text-gray-400 dark:text-gray-500">
-        {getReadingTime(post.excerpt)}
+        {localizedReadingTime}
       </span>
     </div>
   </div>
