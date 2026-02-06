@@ -5,6 +5,7 @@ import Footer from '@components/Footer.astro';
 import SEO from '@components/SEO.astro';
 import JsonLd from '@components/JsonLd.astro';
 import { themeInitScript } from '@scripts/theme';
+import Analytics from '@vercel/analytics/astro';
 
 interface Props {
   title: string;
@@ -92,6 +93,9 @@ const includeWebsiteSchema = ogType !== 'article';
 
     {/* Theme initialization script - prevents flash of unstyled content */}
     <script is:inline set:html={themeInitScript} />
+    
+    {/* Vercel Web Analytics */}
+    <Analytics />
   </head>
   <body class="flex min-h-screen flex-col">
     {/* Skip to main content link for accessibility */}
