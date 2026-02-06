@@ -151,7 +151,7 @@ const articleSection = post.categories?.[0]?.title || 'Blog';
         keywords: post.seo?.keywords || post.categories?.map(c => c.title),
         author: {
           type: 'Person',
-          name: post.author?.name || 'Jakub Barak',
+          name: post.author?.name || 'Jakub Barák',
           url: post.author?.slug?.current 
             ? new URL(`/author/${post.author.slug?.current}`, Astro.site || 'https://jakubbarak.com').href
             : Astro.site?.href || 'https://jakubbarak.com',

@@ -1,4 +1,4 @@
-# Jakub Barak Website
+# Jakub Barák Website
 
 A personal website and blog built with [Astro](https://astro.build), [Tailwind CSS](https://tailwindcss.com), and [Sanity.io](https://www.sanity.io) as the headless CMS.
 

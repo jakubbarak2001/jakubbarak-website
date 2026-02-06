@@ -10,7 +10,7 @@ export async function GET(context: APIContext) {
   
   return rss({
     // Channel metadata
-    title: 'Jakub Barak - Blog',
+    title: 'Jakub Barák - Blog',
     description: 'Thoughts on learning, self-improvement, polymathy, and personal growth. Exploring ideas that help us become better versions of ourselves.',
     site: siteUrl,
     
@@ -27,7 +27,7 @@ export async function GET(context: APIContext) {
         description: post.excerpt || '',
         link: postUrl,
         // Add author if available
-        author: post.author?.name || 'Jakub Barak',
+        author: post.author?.name || 'Jakub Barák',
         // Add categories if available
         categories: post.categories?.map(cat => cat.title) || [],
         // Custom fields for enhanced RSS
@@ -46,7 +46,7 @@ export async function GET(context: APIContext) {
       <ttl>60</ttl>
       <image>
         <url>${new URL('/og-image.png', siteUrl).href}</url>
-        <title>Jakub Barak - Blog</title>
+        <title>Jakub Barák - Blog</title>
         <link>${siteUrl}</link>
       </image>
       <atom:link href="${new URL('/rss.xml', siteUrl).href}" rel="self" type="application/rss+xml" xmlns:atom="http://www.w3.org/2005/Atom" />

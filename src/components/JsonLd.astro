@@ -122,7 +122,7 @@ function generateSchema(data: SchemaProps): Record<string, unknown> {
         author: generateSchema(data.author),
         publisher: data.publisher ? generateSchema(data.publisher) : {
           '@type': 'Organization',
-          name: 'Jakub Barak',
+          name: 'Jakub Barák',
           url: 'https://jakubbarak.com',
           logo: {
             '@type': 'ImageObject',
