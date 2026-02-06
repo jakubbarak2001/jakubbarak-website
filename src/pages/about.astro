@@ -1,5 +1,9 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
+
+const substackUrl =
+  import.meta.env.PUBLIC_SUBSTACK_URL?.trim() ||
+  'https://substack.com/@jakubbarak';
 ---
 
 <BaseLayout 
@@ -40,7 +44,7 @@ import BaseLayout from '@layouts/BaseLayout.astro';
           <!-- Social Links -->
           <div class="flex items-center justify-center md:justify-start gap-4 mt-6">
             <a 
-              href="https://github.com/jakubbarak" 
+              href="https://github.com/jakubbarak2001" 
               target="_blank" 
               rel="noopener noreferrer"
               class="p-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
@@ -51,25 +55,14 @@ import BaseLayout from '@layouts/BaseLayout.astro';
               </svg>
             </a>
             <a 
-              href="https://linkedin.com/in/jakubbarak" 
+              href={substackUrl} 
               target="_blank" 
               rel="noopener noreferrer"
               class="p-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
-              aria-label="LinkedIn"
+              aria-label="Substack"
             >
               <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-              </svg>
-            </a>
-            <a 
-              href="https://twitter.com/jakubbarak" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              class="p-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
-              aria-label="Twitter/X"
-            >
-              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                <path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z" />
               </svg>
             </a>
           </div>
@@ -87,11 +80,11 @@ import BaseLayout from '@layouts/BaseLayout.astro';
       
       <div class="prose prose-lg dark:prose-invert prose-gray max-w-none">
         <p class="text-gray-600 dark:text-gray-400 leading-relaxed mb-6">
-          I've always been fascinated by the process of learning itself—not just acquiring knowledge, but understanding <em>how</em> we learn best. This curiosity led me down a path of exploring meta-learning, cognitive science, and the habits that separate good learners from great ones.
+          I spent my childhood mastering virtual worlds, but I used to doubt my ability to master the real one. I realized that the "leveling up" systems I loved in games were missing from real life—so I decided to build them.
         </p>
         
         <p class="text-gray-600 dark:text-gray-400 leading-relaxed mb-6">
-          Rather than specializing in a single domain, I've embraced the polymath approach—diving deep into multiple fields and finding unexpected connections between them. From technology and software development to psychology, philosophy, and beyond, I believe that true innovation happens at the intersections of disciplines.
+          Rather than being limited in one narrow field, I’ve spent years studying various topics such as: Python development, human psychology, and much more. My goal is to move beyond "cheap tricks" and surface-level habits. I’m interested in the underlying architecture of how we grow.
         </p>
         
         <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
@@ -123,7 +116,7 @@ import BaseLayout from '@layouts/BaseLayout.astro';
               </div>
             </div>
             <div>
-              <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-3">Learning & Meta-Learning</h3>
+              <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-3">Skill Acquisition & Efficiency</h3>
               <p class="text-gray-600 dark:text-gray-400 leading-relaxed mb-4">
                 How do we learn effectively? What separates those who acquire skills quickly from those who struggle? I explore evidence-based learning strategies, memory techniques, deliberate practice, and the science behind skill acquisition.
               </p>
@@ -160,7 +153,7 @@ import BaseLayout from '@layouts/BaseLayout.astro';
               </div>
             </div>
             <div>
-              <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-3">Self-Improvement & Personal Systems</h3>
+              <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-3">Life Operating Systems</h3>
               <p class="text-gray-600 dark:text-gray-400 leading-relaxed mb-4">
                 Sustainable growth isn't about motivation—it's about systems. I write about building habits that stick, designing your environment for success, and creating feedback loops that compound over time.
               </p>
@@ -197,7 +190,7 @@ import BaseLayout from '@layouts/BaseLayout.astro';
               </div>
             </div>
             <div>
-              <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-3">Polymathy & Cross-Domain Thinking</h3>
+              <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-3">Multiclassing & Synthesis</h3>
               <p class="text-gray-600 dark:text-gray-400 leading-relaxed mb-4">
                 In a world that pushes specialization, there's unique power in breadth. I explore how connecting ideas across fields creates novel insights, the case for being a "T-shaped" thinker, and practical strategies for developing expertise in multiple domains.
               </p>
@@ -283,10 +276,10 @@ import BaseLayout from '@layouts/BaseLayout.astro';
       </p>
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
         <a
-          href="/blog"
+          href={substackUrl}
           class="w-full sm:w-auto rounded-xl bg-white px-8 py-4 text-base font-semibold text-gray-900 shadow-lg hover:bg-gray-100 transition-all"
         >
-          Read the Blog
+          Read on Substack
         </a>
         <a
           href="mailto:hello@jakubbarak.com"

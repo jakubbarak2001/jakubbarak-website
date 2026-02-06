@@ -5,7 +5,6 @@ import Footer from '@components/Footer.astro';
 import SEO from '@components/SEO.astro';
 import JsonLd from '@components/JsonLd.astro';
 import { themeInitScript } from '@scripts/theme';
-import Analytics from '@vercel/analytics/astro';
 
 interface Props {
   title: string;
@@ -51,10 +50,6 @@ const includeWebsiteSchema = ogType !== 'article';
     {/* Preconnect to external domains for better performance */}
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preconnect" href="https://cdn.sanity.io" />
-    
-    {/* DNS prefetch for performance */}
-    <link rel="dns-prefetch" href="https://cdn.sanity.io" />
     
     {/* SEO Component */}
     <SEO 
@@ -82,9 +77,8 @@ const includeWebsiteSchema = ogType !== 'article';
             url: siteUrl,
             description: 'Writer, learner, and polymath exploring personal growth and self-improvement.',
             sameAs: [
-              'https://twitter.com/jakubbarak',
-              'https://linkedin.com/in/jakubbarak',
-              'https://github.com/jakubbarak',
+              'https://github.com/jakubbarak2001',
+              'https://substack.com/@jakubbarak',
             ],
           },
         }}
@@ -94,8 +88,6 @@ const includeWebsiteSchema = ogType !== 'article';
     {/* Theme initialization script - prevents flash of unstyled content */}
     <script is:inline set:html={themeInitScript} />
     
-    {/* Vercel Web Analytics */}
-    <Analytics />
   </head>
   <body class="flex min-h-screen flex-col">
     {/* Skip to main content link for accessibility */}

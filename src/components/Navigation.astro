@@ -4,18 +4,25 @@ interface NavLink {
   label: string;
 }
 
+const substackUrl =
+  import.meta.env.PUBLIC_SUBSTACK_URL?.trim() ||
+  'https://substack.com/@jakubbarak';
+
 const navLinks: NavLink[] = [
   { href: '/', label: 'Home' },
-  { href: '/blog', label: 'Blog' },
+  { href: substackUrl, label: 'Substack' },
   { href: '/about', label: 'About' },
 ];
 
 const currentPath = Astro.url.pathname;
 
-// Helper to check if a link is active
+// Helper to check if a link is active (external links are never active)
 function isActive(href: string): boolean {
   if (href === '/') {
     return currentPath === '/';
+  }
+  if (href.startsWith('http')) {
+    return false;
   }
   return currentPath.startsWith(href);
 }

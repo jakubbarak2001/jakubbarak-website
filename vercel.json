@@ -8,44 +8,25 @@
   "headers": [
     {
       "source": "/fonts/(.*)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
-      ]
+      "headers": [{"key": "Cache-Control", "value": "public, max-age=31536000, immutable"}]
     },
     {
       "source": "/_astro/(.*)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
-      ]
+      "headers": [{"key": "Cache-Control", "value": "public, max-age=31536000, immutable"}]
     },
     {
       "source": "/(.*)",
       "headers": [
-        {
-          "key": "X-Content-Type-Options",
-          "value": "nosniff"
-        },
-        {
-          "key": "X-Frame-Options",
-          "value": "DENY"
-        },
-        {
-          "key": "X-XSS-Protection",
-          "value": "1; mode=block"
-        },
-        {
-          "key": "Referrer-Policy",
-          "value": "strict-origin-when-cross-origin"
-        }
+        {"key": "X-Content-Type-Options", "value": "nosniff"},
+        {"key": "X-Frame-Options", "value": "DENY"},
+        {"key": "X-XSS-Protection", "value": "1; mode=block"},
+        {"key": "Referrer-Policy", "value": "strict-origin-when-cross-origin"}
       ]
     }
   ],
   "rewrites": [],
-  "redirects": []
+  "redirects": [
+    {"source": "/blog", "destination": "https://substack.com/@jakubbarak", "permanent": true},
+    {"source": "/blog/:path*", "destination": "https://substack.com/@jakubbarak", "permanent": true}
+  ]
 }
