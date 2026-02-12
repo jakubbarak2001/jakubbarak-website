@@ -32,6 +32,8 @@ export default {
           'Arial',
           'sans-serif',
         ],
+        playfair: ['Playfair Display', 'Georgia', 'serif'],
+        'jetbrains-mono': ['JetBrains Mono', 'ui-monospace', 'monospace'],
       },
       typography: {
         DEFAULT: {

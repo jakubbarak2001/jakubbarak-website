@@ -9,10 +9,63 @@
     transition: background-color 0.3s ease, color 0.3s ease;
   }
 
-  /* Base body styles */
+  /* Base body styles - Inter for readability */
   body {
     @apply min-h-screen bg-white text-gray-900 antialiased;
     @apply dark:bg-gray-900 dark:text-gray-100;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-size: 1rem;
+  }
+
+  /* Main headings - Playfair Display (h1, h2, h3) */
+  h1,
+  h2,
+  h3,
+  .core-themes-title {
+    font-family: 'Playfair Display', Georgia, serif;
+  }
+
+  h1 {
+    font-weight: 700;
+  }
+
+  h2,
+  h3 {
+    font-weight: 600;
+  }
+
+  /* Builder aesthetic - badges, nav, accents */
+  .font-builder {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 0.8125rem;
+  }
+
+  /* Core Themes card descriptions - better readability */
+  .theme-description {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+
+  /* Compendium list items - System vs. Philosophy contrast (use !important to override Tailwind) */
+  .compendium-title {
+    font-family: 'Playfair Display', Georgia, serif !important;
+  }
+
+  .compendium-accent {
+    font-family: 'JetBrains Mono', ui-monospace, monospace !important;
+  }
+
+  /* Primary CTA - Builder aesthetic */
+  .btn-read-substack {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+  }
+
+  /* Simpler ampersand in Playfair Display titles (avoids ornate glyph) */
+  .ampersand-normal {
+    font-family: 'Inter', system-ui, sans-serif;
   }
 
   /* Improve focus visibility for accessibility */

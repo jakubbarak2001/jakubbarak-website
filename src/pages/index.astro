@@ -12,13 +12,13 @@ const substackUrl =
   showNewsletter={true}
 >
   <!-- Hero Section -->
-  <section class="relative overflow-hidden bg-gradient-to-b from-gray-50 to-white dark:from-gray-800 dark:to-gray-900">
+  <section class="relative overflow-hidden bg-gradient-to-b from-emerald-50 to-white dark:from-emerald-950/80 dark:to-emerald-900/50">
     <div class="absolute inset-0 bg-grid-pattern opacity-5"></div>
     <div class="relative mx-auto max-w-6xl px-4 py-20 sm:py-28 lg:py-32">
       <div class="flex flex-col items-center text-center">
         <!-- Badge -->
-        <div class="mb-6 inline-flex items-center rounded-full border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 px-4 py-1.5 text-sm text-gray-600 dark:text-gray-400 shadow-sm">
-          <span class="mr-2 h-2 w-2 rounded-full bg-green-500 animate-pulse"></span>
+        <div class="font-builder mb-6 inline-flex items-center rounded-full border border-emerald-200 dark:border-emerald-800 bg-white/80 dark:bg-emerald-950/50 backdrop-blur px-4 py-1.5 text-emerald-800 dark:text-emerald-300 shadow-sm">
+          <span class="mr-2 h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
           Building in public
         </div>
         
@@ -28,7 +28,7 @@ const substackUrl =
         </h1>
         
         <!-- Subheadline -->
-        <p class="mt-6 max-w-2xl text-lg text-gray-600 dark:text-gray-400 sm:text-xl leading-relaxed">
+        <p class="mt-6 max-w-2xl text-lg text-gray-600 dark:text-emerald-100/90 sm:text-xl leading-relaxed">
           Stop drifting and start building. I dissect the systems behind metalearning, coding, and psychology to help you map your own path to mastery—no matter what you're chasing.
         </p>
         
@@ -36,21 +36,21 @@ const substackUrl =
         <div class="mt-10 flex flex-col sm:flex-row items-center gap-4">
           <a
             href={substackUrl}
-            class="group rounded-xl bg-gray-900 dark:bg-white px-8 py-4 text-base font-semibold text-white dark:text-gray-900 shadow-lg hover:bg-gray-700 dark:hover:bg-gray-200 transition-all hover:shadow-xl hover:-translate-y-0.5"
+            class="btn-read-substack group rounded-xl bg-emerald-600 dark:bg-emerald-500 px-8 py-4 text-base font-semibold text-white shadow-lg hover:bg-emerald-700 dark:hover:bg-emerald-400 transition-all hover:shadow-xl hover:-translate-y-0.5"
           >
             Read on Substack
             <span class="inline-block ml-2 transition-transform group-hover:translate-x-1">→</span>
           </a>
           <a
             href="/about"
-            class="rounded-xl border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 px-8 py-4 text-base font-semibold text-gray-900 dark:text-white shadow-sm hover:border-gray-300 dark:hover:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all"
+            class="rounded-xl border-2 border-emerald-300 dark:border-emerald-600 bg-white dark:bg-emerald-950/50 px-8 py-4 text-base font-semibold text-emerald-800 dark:text-emerald-100 shadow-sm hover:border-emerald-400 dark:hover:border-emerald-500 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 transition-all"
           >
             About Me
           </a>
         </div>
         
         <!-- Trust Indicators -->
-        <div class="mt-16 flex flex-wrap items-center justify-center gap-8 text-sm text-gray-500 dark:text-gray-500">
+        <div class="mt-16 flex flex-wrap items-center justify-center gap-8 text-sm text-emerald-700 dark:text-emerald-300">
           <div class="flex items-center gap-2">
             <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
@@ -75,53 +75,53 @@ const substackUrl =
   </section>
 
   <!-- Topics Section -->
-  <section class="py-20 bg-gray-50 dark:bg-gray-800">
+  <section class="py-20 bg-emerald-50/70 dark:bg-emerald-950/30">
     <div class="mx-auto max-w-6xl px-4">
       <div class="text-center mb-16">
-        <p class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">
+        <p class="text-sm font-semibold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider mb-2">
           What I Write About
         </p>
-        <h2 class="text-3xl font-bold text-gray-900 dark:text-white sm:text-4xl">
+        <h2 class="core-themes-title text-3xl font-bold text-gray-900 dark:text-white sm:text-4xl">
           Core Themes
         </h2>
       </div>
       
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         <!-- Learning -->
-        <div class="group bg-white dark:bg-gray-900 rounded-2xl p-8 border border-gray-100 dark:border-gray-700 hover:border-gray-200 dark:hover:border-gray-600 transition-all hover:shadow-lg">
-          <div class="w-14 h-14 rounded-xl bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-            <svg class="h-7 w-7 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div class="group bg-white dark:bg-emerald-950/40 rounded-2xl p-8 border border-emerald-100 dark:border-emerald-800/50 hover:border-emerald-200 dark:hover:border-emerald-700 transition-all hover:shadow-lg">
+          <div class="w-14 h-14 rounded-xl bg-emerald-100 dark:bg-emerald-900/40 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+            <svg class="h-7 w-7 text-emerald-600 dark:text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
             </svg>
           </div>
           <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-3">Learning</h3>
-          <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
+          <p class="theme-description text-gray-600 dark:text-gray-400 leading-relaxed">
             Meta-learning strategies, effective study techniques, and the science of acquiring new skills faster. How to learn anything efficiently.
           </p>
         </div>
 
         <!-- Self-Improvement -->
-        <div class="group bg-white dark:bg-gray-900 rounded-2xl p-8 border border-gray-100 dark:border-gray-700 hover:border-gray-200 dark:hover:border-gray-600 transition-all hover:shadow-lg">
-          <div class="w-14 h-14 rounded-xl bg-green-100 dark:bg-green-900/30 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-            <svg class="h-7 w-7 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div class="group bg-white dark:bg-emerald-950/40 rounded-2xl p-8 border border-emerald-100 dark:border-emerald-800/50 hover:border-emerald-200 dark:hover:border-emerald-700 transition-all hover:shadow-lg">
+          <div class="w-14 h-14 rounded-xl bg-emerald-100 dark:bg-emerald-900/40 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+            <svg class="h-7 w-7 text-emerald-600 dark:text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
             </svg>
           </div>
           <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-3">Self-Improvement</h3>
-          <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
+          <p class="theme-description text-gray-600 dark:text-gray-400 leading-relaxed">
             Habits, mindset, and systems for personal growth. Building sustainable routines that compound over time into meaningful change.
           </p>
         </div>
 
         <!-- Polymathy -->
-        <div class="group bg-white dark:bg-gray-900 rounded-2xl p-8 border border-gray-100 dark:border-gray-700 hover:border-gray-200 dark:hover:border-gray-600 transition-all hover:shadow-lg">
-          <div class="w-14 h-14 rounded-xl bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-            <svg class="h-7 w-7 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div class="group bg-white dark:bg-emerald-950/40 rounded-2xl p-8 border border-emerald-100 dark:border-emerald-800/50 hover:border-emerald-200 dark:hover:border-emerald-700 transition-all hover:shadow-lg">
+          <div class="w-14 h-14 rounded-xl bg-emerald-100 dark:bg-emerald-900/40 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+            <svg class="h-7 w-7 text-emerald-600 dark:text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
             </svg>
           </div>
           <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-3">Polymathy</h3>
-          <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
+          <p class="theme-description text-gray-600 dark:text-gray-400 leading-relaxed">
             The power of cross-domain expertise. How connecting ideas from different fields creates unique insights and innovative solutions.
           </p>
         </div>
@@ -130,10 +130,10 @@ const substackUrl =
   </section>
 
   <!-- Future Products Section -->
-  <section class="py-20 bg-white dark:bg-gray-900">
+  <section class="py-20 bg-white dark:bg-emerald-950/20">
     <div class="mx-auto max-w-6xl px-4">
       <div class="text-center mb-16">
-        <p class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">
+        <p class="text-sm font-semibold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider mb-2">
           Coming Soon
         </p>
         <h2 class="text-3xl font-bold text-gray-900 dark:text-white sm:text-4xl">
@@ -145,78 +145,72 @@ const substackUrl =
       </div>
 
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <!-- E-Books Card -->
-        <div class="relative group overflow-hidden bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 rounded-2xl p-8 lg:p-10 border border-amber-100 dark:border-amber-800/30">
+        <!-- Software Card -->
+        <div class="relative group overflow-hidden bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20 rounded-2xl p-8 lg:p-10 border border-emerald-100 dark:border-emerald-800/30">
           <div class="absolute top-4 right-4">
-            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-amber-100 dark:bg-amber-800/40 text-amber-700 dark:text-amber-300">
-              In Development
+            <span class="font-builder inline-flex items-center px-3 py-1 rounded-full font-medium bg-emerald-100 dark:bg-emerald-800/40 text-emerald-700 dark:text-emerald-300">
+              Coming Later
             </span>
           </div>
-          <div class="w-16 h-16 rounded-2xl bg-amber-100 dark:bg-amber-800/40 flex items-center justify-center mb-6">
-            <svg class="h-8 w-8 text-amber-600 dark:text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+          <div class="w-16 h-16 rounded-2xl bg-emerald-100 dark:bg-emerald-800/40 flex items-center justify-center mb-6">
+            <svg class="h-8 w-8 text-emerald-600 dark:text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
             </svg>
           </div>
-          <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-3">E-Books & Guides</h3>
+          <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-3">Software <span class="ampersand-normal">&</span> Tools</h3>
           <p class="text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
-            Comprehensive guides on learning strategies, productivity systems, and cross-disciplinary skill development. Distilled knowledge from years of research and experimentation.
+            Digital tools designed to enhance your self-improvement journey and track your progress across multiple domains. Built with the polymath mindset in mind.
           </p>
           <ul class="space-y-3">
-            <li class="flex items-center text-sm text-gray-600 dark:text-gray-400">
-              <svg class="mr-3 h-5 w-5 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <li class="flex items-center text-sm font-bold text-gray-700 dark:text-gray-300">
+              <svg class="mr-3 h-5 w-5 text-emerald-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
               </svg>
-              Meta-Learning Masterclass
+              <span class="compendium-title font-playfair">Self-improvement gamification app</span>
             </li>
-            <li class="flex items-center text-sm text-gray-600 dark:text-gray-400">
-              <svg class="mr-3 h-5 w-5 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <li class="flex items-center text-sm font-bold text-gray-700 dark:text-gray-300">
+              <svg class="mr-3 h-5 w-5 text-emerald-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
               </svg>
-              The Polymath's Playbook
-            </li>
-            <li class="flex items-center text-sm text-gray-600 dark:text-gray-400">
-              <svg class="mr-3 h-5 w-5 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-              </svg>
-              Systems for Sustainable Growth
+              <span class="compendium-title font-playfair">Custom life talents tree</span>
             </li>
           </ul>
         </div>
 
-        <!-- Software Card -->
-        <div class="relative group overflow-hidden bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-2xl p-8 lg:p-10 border border-blue-100 dark:border-blue-800/30">
+        <!-- E-Books Card -->
+        <div class="relative group overflow-hidden bg-gradient-to-br from-emerald-50 to-green-50 dark:from-emerald-900/20 dark:to-green-900/20 rounded-2xl p-8 lg:p-10 border border-emerald-100 dark:border-emerald-800/30">
           <div class="absolute top-4 right-4">
-            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 dark:bg-blue-800/40 text-blue-700 dark:text-blue-300">
-              Coming Later
+            <span class="font-builder inline-flex items-center px-3 py-1 rounded-full font-medium bg-emerald-200/80 dark:bg-emerald-700/40 text-emerald-800 dark:text-emerald-200">
+              In Development
             </span>
           </div>
-          <div class="w-16 h-16 rounded-2xl bg-blue-100 dark:bg-blue-800/40 flex items-center justify-center mb-6">
-            <svg class="h-8 w-8 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+          <div class="w-16 h-16 rounded-2xl bg-emerald-200/60 dark:bg-emerald-700/40 flex items-center justify-center mb-6">
+            <svg class="h-8 w-8 text-emerald-600 dark:text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
             </svg>
           </div>
-          <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-3">Software & Tools</h3>
+          <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-3">E-Books <span class="ampersand-normal">&</span> Guides</h3>
           <p class="text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
-            Digital tools designed to enhance your learning workflow and track your progress across multiple domains. Built with the polymath mindset in mind.
+            Comprehensive guides on learning strategies, productivity systems, and cross-disciplinary skill development. Distilled knowledge from years of research and experimentation.
           </p>
           <ul class="space-y-3">
-            <li class="flex items-center text-sm text-gray-600 dark:text-gray-400">
-              <svg class="mr-3 h-5 w-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <li class="flex items-center text-sm font-bold text-gray-700 dark:text-gray-300">
+              <svg class="mr-3 h-5 w-5 text-emerald-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
               </svg>
-              Learning Progress Tracker
+              <span class="compendium-title font-playfair">The Compendium I</span><span class="compendium-accent font-jetbrains-mono"> : On Polymathy</span>
             </li>
-            <li class="flex items-center text-sm text-gray-600 dark:text-gray-400">
-              <svg class="mr-3 h-5 w-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <li class="flex items-center text-sm font-bold text-gray-700 dark:text-gray-300">
+              <svg class="mr-3 h-5 w-5 text-emerald-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
               </svg>
-              Knowledge Connection Mapper
+              <span class="compendium-title font-playfair">The Compendium II</span><span class="compendium-accent font-jetbrains-mono"> : On Learning</span>
             </li>
-            <li class="flex items-center text-sm text-gray-600 dark:text-gray-400">
-              <svg class="mr-3 h-5 w-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <li class="flex items-center text-sm font-bold text-gray-700 dark:text-gray-300">
+              <svg class="mr-3 h-5 w-5 text-emerald-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
               </svg>
-              Spaced Repetition System
+              <span class="compendium-title font-playfair">The Compendium III</span><span class="compendium-accent font-jetbrains-mono"> : On Finances</span>
             </li>
           </ul>
         </div>
@@ -225,24 +219,24 @@ const substackUrl =
   </section>
 
   <!-- Call to Action Section -->
-  <section class="py-20 bg-gray-900 dark:bg-gray-950">
+  <section class="py-20 bg-emerald-800 dark:bg-emerald-950">
     <div class="mx-auto max-w-4xl px-4 text-center">
       <h2 class="text-3xl font-bold text-white sm:text-4xl mb-6">
         Ready to Level Up Your Learning?
       </h2>
-      <p class="text-lg text-gray-300 mb-10 max-w-2xl mx-auto">
+      <p class="text-lg text-emerald-100 mb-10 max-w-2xl mx-auto">
         Join the newsletter for weekly insights on learning, self-improvement, and building expertise across multiple domains. No spam, just actionable ideas.
       </p>
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
         <a
           href={substackUrl}
-          class="w-full sm:w-auto rounded-xl bg-white px-8 py-4 text-base font-semibold text-gray-900 shadow-lg hover:bg-gray-100 transition-all hover:shadow-xl"
+          class="font-jetbrains-mono w-full sm:w-auto rounded-xl bg-white px-8 py-4 text-base font-semibold text-emerald-800 shadow-lg hover:bg-emerald-50 transition-all hover:shadow-xl"
         >
           Visit My Substack
         </a>
         <a
           href="/about"
-          class="w-full sm:w-auto rounded-xl border-2 border-gray-600 px-8 py-4 text-base font-semibold text-white hover:border-gray-500 hover:bg-gray-800 transition-all"
+          class="font-jetbrains-mono w-full sm:w-auto rounded-xl border-2 border-emerald-400 px-8 py-4 text-base font-semibold text-white hover:border-emerald-300 hover:bg-emerald-700/50 transition-all"
         >
           Learn More About Me
         </a>
@@ -253,6 +247,6 @@ const substackUrl =
 
 <style>
   .bg-grid-pattern {
-    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23059669' fill-opacity='0.2'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
   }
 </style>
