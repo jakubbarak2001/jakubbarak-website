@@ -1,6 +1,5 @@
 ---
 import Navigation from './Navigation.astro';
-import ThemeToggle from './ThemeToggle.astro';
 
 interface Props {
   siteName?: string;
@@ -9,20 +8,19 @@ interface Props {
 const { siteName = 'Jakub Barák' } = Astro.props;
 ---
 
-<header id="header" class="sticky top-0 z-50 w-full border-b border-emerald-200 dark:border-emerald-800/50 bg-white/80 dark:bg-emerald-950/90 backdrop-blur-sm">
+<header id="header" class="sticky top-0 z-50 w-full border-b border-emerald-800/50 bg-emerald-950/90 backdrop-blur-sm">
   <div class="relative mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
     {/* Logo / Site Name */}
     <a 
       href="/" 
-      class="text-xl font-bold text-gray-900 dark:text-white hover:text-emerald-700 dark:hover:text-emerald-300 transition-colors"
+      class="text-xl font-bold text-white hover:text-emerald-300 transition-colors"
     >
       {siteName}
     </a>
 
-    {/* Right side: Navigation + Theme Toggle */}
+    {/* Right side: Navigation */}
     <div class="flex items-center gap-4">
       <Navigation />
-      <ThemeToggle />
     </div>
   </div>
 </header>

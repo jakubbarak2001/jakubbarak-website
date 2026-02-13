@@ -4,7 +4,6 @@ import Header from '@components/Header.astro';
 import Footer from '@components/Footer.astro';
 import SEO from '@components/SEO.astro';
 import JsonLd from '@components/JsonLd.astro';
-import { themeInitScript } from '@scripts/theme';
 
 interface Props {
   title: string;
@@ -40,7 +39,7 @@ const includeWebsiteSchema = ogType !== 'article';
 ---
 
 <!doctype html>
-<html lang="en" class="">
+<html lang="en" class="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -89,15 +88,12 @@ const includeWebsiteSchema = ogType !== 'article';
       />
     )}
 
-    {/* Theme initialization script - prevents flash of unstyled content */}
-    <script is:inline set:html={themeInitScript} />
-    
   </head>
   <body class="flex min-h-screen flex-col">
     {/* Skip to main content link for accessibility */}
     <a 
       href="#main-content" 
-      class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:p-4 focus:bg-white focus:text-gray-900 dark:focus:bg-gray-800 dark:focus:text-white"
+      class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:p-4 focus:bg-gray-800 focus:text-white"
     >
       Skip to main content
     </a>
