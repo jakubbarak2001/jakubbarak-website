@@ -65,7 +65,7 @@
 
   /* Simpler ampersand in Playfair Display titles (avoids ornate glyph) */
   .ampersand-normal {
-    font-family: 'Inter', system-ui, sans-serif;
+    font-family: 'Inter', system-ui, sans-serif !important;
   }
 
   /* Improve focus visibility for accessibility */
