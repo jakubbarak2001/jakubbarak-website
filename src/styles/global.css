@@ -3,6 +3,30 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --animation-duration-fast: 300ms;
+    --animation-duration-base: 500ms;
+    --animation-duration-slow: 800ms;
+    --animation-delay-base: 100ms;
+    --animation-delay-card: 150ms;
+  }
+
+  @media (max-width: 768px) {
+    :root {
+      --animation-duration-base: 180ms;
+      --animation-delay-card: 75ms;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    :root {
+      --animation-duration-fast: 50ms;
+      --animation-duration-base: 50ms;
+      --animation-duration-slow: 100ms;
+      --animation-delay-base: 0ms;
+      --animation-delay-card: 0ms;
+    }
+  }
   /* Smooth transitions for theme switching */
   html {
     @apply scroll-smooth;
@@ -172,6 +196,74 @@
     to {
       opacity: 1;
       transform: translateY(0);
+    }
+  }
+
+  /* Animation utilities for scroll/load triggers */
+  .animate-on-scroll {
+    @apply opacity-0 translate-y-4;
+    transition: all var(--animation-duration-base) ease-out;
+  }
+
+  .animate-on-scroll[data-animation-stagger] > * {
+    opacity: 0;
+    transform: translateY(1rem);
+    transition: all var(--animation-duration-base) ease-out;
+  }
+
+  .animate-on-scroll[data-animation-stagger] > .animate-triggered {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .animate-on-load {
+    @apply opacity-0 translate-y-2;
+    transition: all var(--animation-duration-base) ease-out;
+  }
+
+  .animate-triggered {
+    @apply opacity-100 translate-y-0 scale-100;
+    transition: all var(--animation-duration-base) ease-out;
+  }
+
+  /* Type variants: fade has no initial translate, scale has initial scale */
+  .animate-type-fade {
+    @apply translate-y-0;
+  }
+
+  .animate-type-scale {
+    @apply translate-y-0 scale-95;
+  }
+
+  /* Card hover - lift, shadow, border glow */
+  .card-hover {
+    @apply transition-all duration-200;
+    @apply hover:-translate-y-1 hover:shadow-xl;
+    @apply hover:border-emerald-300 dark:hover:border-emerald-700;
+  }
+
+  /* Progressive enhancement: show content when JS is disabled */
+  html:not(.js) .animate-on-scroll,
+  html:not(.js) .animate-on-load {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+  }
+
+  /* Reduced motion: disable transforms, fade only, remove stagger delays */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-on-scroll,
+    .animate-on-load,
+    .animate-type-fade,
+    .animate-type-scale {
+      transform: none !important;
+    }
+
+    .animate-triggered {
+      transform: none !important;
+    }
+
+    .card-hover:hover {
+      transform: none !important;
     }
   }
 
