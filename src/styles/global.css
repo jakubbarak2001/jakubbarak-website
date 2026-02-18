@@ -271,4 +271,23 @@
   .no-scroll {
     overflow: hidden;
   }
+
+  @keyframes shine {
+    0%, 100% {
+      box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+    }
+    50% {
+      box-shadow: 0 0 40px rgba(16, 185, 129, 0.6);
+    }
+  }
+
+  .hero-glow {
+    animation: shine 3s ease-in-out infinite;
+  }
+
+  .neumorphic {
+    @apply backdrop-blur-sm;
+    @apply bg-white/80 dark:bg-emerald-950/60;
+    @apply shadow-[inset_0_2px_4px_rgba(0,0,0,0.1)];
+  }
 }
