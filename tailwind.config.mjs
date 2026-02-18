@@ -42,6 +42,39 @@ export default {
           },
         },
       },
+      keyframes: {
+        'slide-up': {
+          '0%': { opacity: '0', transform: 'translateY(1rem)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        'fade-in': {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        'scale-in': {
+          '0%': { opacity: '0', transform: 'scale(0.95)' },
+          '100%': { opacity: '1', transform: 'scale(1)' },
+        },
+      },
+      animation: {
+        'slide-up': 'slide-up var(--animation-duration-base, 250ms) ease-out forwards',
+        'fade-in': 'fade-in var(--animation-duration-base, 250ms) ease-out forwards',
+        'scale-in': 'scale-in var(--animation-duration-base, 250ms) ease-out forwards',
+      },
+      transitionDuration: {
+        '150': '150ms',
+        '250': '250ms',
+        '400': '400ms',
+      },
+      transitionTimingFunction: {
+        'out-expo': 'cubic-bezier(0.16, 1, 0.3, 1)',
+      },
+      /* Responsive animation timing: faster on mobile */
+      animationDuration: {
+        fast: 'var(--animation-duration-fast, 150ms)',
+        base: 'var(--animation-duration-base, 250ms)',
+        slow: 'var(--animation-duration-slow, 400ms)',
+      },
     },
   },
   plugins: [],

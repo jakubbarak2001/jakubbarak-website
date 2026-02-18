@@ -1,0 +1,19 @@
+---
+interface Props {
+  delay?: number;
+  sequence?: number;
+  type?: 'slide-up' | 'fade';
+  class?: string;
+}
+
+const { delay = 0, sequence = 0, type = 'slide-up', class: className = '' } = Astro.props;
+const totalDelay = sequence !== undefined ? delay + sequence * 100 : delay;
+const typeClass = type === 'fade' ? 'animate-type-fade' : '';
+---
+
+<div
+  class={`animate-on-load ${typeClass} ${className}`.trim()}
+  data-animation-delay={totalDelay}
+>
+  <slot />
+</div>

@@ -1,0 +1,30 @@
+---
+import AnimateOnScroll from './AnimateOnScroll.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  icon?: string;
+  delay?: number;
+  class?: string;
+}
+
+const { title, description, icon, delay = 0, class: className = '' } = Astro.props;
+---
+
+<AnimateOnScroll delay={delay}>
+  <div
+    class={`group bg-white dark:bg-emerald-950/40 rounded-2xl p-8 border border-emerald-100 dark:border-emerald-800/50 card-hover hover:border-emerald-300 dark:hover:border-emerald-700 transition-all hover:shadow-xl hover:-translate-y-1 ${className}`}
+  >
+    {Astro.slots.has('icon') && (
+      <div class="w-14 h-14 rounded-xl bg-emerald-100 dark:bg-emerald-900/40 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+        <slot name="icon" />
+      </div>
+    )}
+    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-3">{title}</h3>
+    <p class="theme-description text-gray-600 dark:text-gray-400 leading-relaxed">
+      {description}
+    </p>
+    <slot />
+  </div>
+</AnimateOnScroll>

@@ -1,0 +1,24 @@
+---
+interface Props {
+  delay?: number;
+  stagger?: number;
+  type?: 'slide-up' | 'fade' | 'scale';
+  threshold?: number;
+  rootMargin?: string;
+  class?: string;
+}
+
+const { delay = 0, stagger = 0, type = 'slide-up', threshold = 0.5, rootMargin, class: className = '' } = Astro.props;
+const typeClass = type === 'fade' ? 'animate-type-fade' : type === 'scale' ? 'animate-type-scale' : '';
+---
+
+<div
+  class={`animate-on-scroll ${typeClass} ${className}`.trim()}
+  data-animation-delay={delay}
+  data-animation-stagger={stagger > 0 ? stagger : undefined}
+  data-animation-threshold={threshold}
+  data-animation-root-margin={rootMargin}
+  data-animation-type={type}
+>
+  <slot />
+</div>

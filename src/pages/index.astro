@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
+import AnimateOnLoad from '@components/AnimateOnLoad.astro';
+import AnimateOnScroll from '@components/AnimateOnScroll.astro';
 
 const substackUrl =
   import.meta.env.PUBLIC_SUBSTACK_URL?.trim() ||
@@ -12,45 +14,54 @@ const substackUrl =
   showNewsletter={true}
 >
   <!-- Hero Section -->
-  <section class="relative overflow-hidden bg-gradient-to-b from-emerald-50 to-white dark:from-emerald-950/80 dark:to-emerald-900/50">
+  <section class="relative overflow-hidden bg-gradient-to-b from-emerald-50 via-white to-emerald-50/30 dark:from-emerald-950/80 dark:to-emerald-900/50">
     <div class="absolute inset-0 bg-grid-pattern opacity-5"></div>
     <div class="relative mx-auto max-w-6xl px-4 py-20 sm:py-28 lg:py-32">
       <div class="flex flex-col items-center text-center">
         <!-- Badge -->
-        <div class="font-builder mb-6 inline-flex items-center rounded-full border border-emerald-200 dark:border-emerald-800 bg-white/80 dark:bg-emerald-950/50 backdrop-blur px-4 py-1.5 text-emerald-800 dark:text-emerald-300 shadow-sm">
-          <span class="mr-2 h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
-          Building in public
-        </div>
+        <AnimateOnLoad delay={0} type="slide-up">
+          <div class="font-builder mb-6 inline-flex items-center rounded-full border border-emerald-200 dark:border-emerald-800 bg-white/80 dark:bg-emerald-950/50 backdrop-blur px-4 py-1.5 text-emerald-800 dark:text-emerald-300 shadow-md">
+            <span class="mr-2 h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            Building in public
+          </div>
+        </AnimateOnLoad>
         
         <!-- Main Headline -->
-        <h1 class="text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-5xl md:text-6xl lg:text-7xl text-balance">
-          Level Up Your Life
-        </h1>
+        <AnimateOnLoad delay={100} type="slide-up">
+          <h1 class="text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-5xl md:text-6xl lg:text-7xl text-balance">
+            Level Up Your Life
+          </h1>
+        </AnimateOnLoad>
         
         <!-- Subheadline -->
-        <p class="mt-6 max-w-2xl text-lg text-gray-600 dark:text-emerald-100/90 sm:text-xl leading-relaxed">
-          Stop drifting and start building. I dissect the systems behind <strong>metalearning</strong>, <strong>coding</strong> and <strong>psychology</strong> to help you map your own path to mastery—no matter what you're chasing.
-        </p>
+        <AnimateOnLoad delay={200} type="slide-up">
+          <p class="mt-6 max-w-2xl text-lg text-gray-600 dark:text-emerald-100/90 sm:text-xl leading-relaxed">
+            Stop drifting and start building. I dissect the systems behind <strong>metalearning</strong>, <strong>coding</strong> and <strong>psychology</strong> to help you map your own path to mastery—no matter what you're chasing.
+          </p>
+        </AnimateOnLoad>
         
         <!-- CTA Buttons -->
-        <div class="mt-10 flex flex-col sm:flex-row items-center gap-4">
-          <a
-            href={substackUrl}
-            class="btn-read-substack group rounded-xl bg-emerald-600 dark:bg-emerald-500 px-8 py-4 text-base font-semibold text-white shadow-lg hover:bg-emerald-700 dark:hover:bg-emerald-400 transition-all hover:shadow-xl hover:-translate-y-0.5"
-          >
-            Read on Substack
-            <span class="inline-block ml-2 transition-transform group-hover:translate-x-1">→</span>
-          </a>
-          <a
-            href="/about"
-            class="rounded-xl border-2 border-emerald-300 dark:border-emerald-600 bg-white dark:bg-emerald-950/50 px-8 py-4 text-base font-semibold text-emerald-800 dark:text-emerald-100 shadow-sm hover:border-emerald-400 dark:hover:border-emerald-500 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 transition-all"
-          >
-            About Me
-          </a>
-        </div>
+        <AnimateOnLoad delay={300} type="slide-up">
+          <div class="mt-10 flex flex-col sm:flex-row items-center gap-4">
+            <a
+              href={substackUrl}
+              class="btn-read-substack group rounded-xl bg-emerald-600 dark:bg-emerald-500 px-8 py-4 text-base font-semibold text-white shadow-lg hover:bg-emerald-700 dark:hover:bg-emerald-400 transition-all duration-200 hover:shadow-2xl hover:-translate-y-0.5 hover:scale-[1.02] active:scale-[0.98]"
+            >
+              Read on Substack
+              <span class="inline-block ml-2 transition-transform group-hover:translate-x-1">→</span>
+            </a>
+            <a
+              href="/about"
+              class="rounded-xl border-2 border-emerald-300 dark:border-emerald-600 bg-white dark:bg-emerald-950/50 px-8 py-4 text-base font-semibold text-emerald-800 dark:text-emerald-100 shadow-sm hover:border-emerald-400 dark:hover:border-emerald-500 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]"
+            >
+              About Me
+            </a>
+          </div>
+        </AnimateOnLoad>
         
         <!-- Trust Indicators -->
-        <div class="mt-16 flex flex-wrap items-center justify-center gap-8 text-sm text-emerald-700 dark:text-emerald-300">
+        <AnimateOnLoad delay={400} type="fade">
+          <div class="mt-16 flex flex-wrap items-center justify-center gap-8 text-sm text-emerald-700 dark:text-emerald-300">
           <div class="flex items-center gap-2">
             <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
@@ -70,6 +81,7 @@ const substackUrl =
             <span>Actionable content</span>
           </div>
         </div>
+        </AnimateOnLoad>
       </div>
     </div>
   </section>
@@ -77,18 +89,26 @@ const substackUrl =
   <!-- Topics Section -->
   <section class="py-20 bg-emerald-50/70 dark:bg-emerald-950/30">
     <div class="mx-auto max-w-6xl px-4">
-      <div class="text-center mb-16">
-        <p class="text-sm font-semibold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider mb-2">
-          What I Write About
-        </p>
-        <h2 class="core-themes-title text-3xl font-bold text-gray-900 dark:text-white sm:text-4xl">
-          Core Themes
-        </h2>
-      </div>
+      <AnimateOnScroll type="slide-up">
+        <div class="text-center mb-16">
+          <p class="text-sm font-semibold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider mb-2">
+            What I Write About
+          </p>
+          <h2 class="core-themes-title text-3xl font-bold text-gray-900 dark:text-white sm:text-4xl">
+            Core Themes
+          </h2>
+        </div>
+      </AnimateOnScroll>
       
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <AnimateOnScroll
+        stagger={150}
+        type="slide-up"
+        threshold={0.2}
+        rootMargin="0px 0px -80px 0px"
+        class="grid grid-cols-1 md:grid-cols-3 gap-8"
+      >
         <!-- Learning -->
-        <div class="group bg-white dark:bg-emerald-950/40 rounded-2xl p-8 border border-emerald-100 dark:border-emerald-800/50 hover:border-emerald-200 dark:hover:border-emerald-700 transition-all hover:shadow-lg">
+        <div class="group bg-white dark:bg-emerald-950/40 rounded-2xl p-8 border border-emerald-100 dark:border-emerald-800/50 hover:border-emerald-300 dark:hover:border-emerald-600 transition-all hover:shadow-xl hover:-translate-y-1">
           <div class="w-14 h-14 rounded-xl bg-emerald-100 dark:bg-emerald-900/40 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
             <svg class="h-7 w-7 text-emerald-600 dark:text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
@@ -101,7 +121,7 @@ const substackUrl =
         </div>
 
         <!-- Self-Improvement -->
-        <div class="group bg-white dark:bg-emerald-950/40 rounded-2xl p-8 border border-emerald-100 dark:border-emerald-800/50 hover:border-emerald-200 dark:hover:border-emerald-700 transition-all hover:shadow-lg">
+        <div class="group bg-white dark:bg-emerald-950/40 rounded-2xl p-8 border border-emerald-100 dark:border-emerald-800/50 hover:border-emerald-300 dark:hover:border-emerald-600 transition-all hover:shadow-xl hover:-translate-y-1">
           <div class="w-14 h-14 rounded-xl bg-emerald-100 dark:bg-emerald-900/40 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
             <svg class="h-7 w-7 text-emerald-600 dark:text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
@@ -114,7 +134,7 @@ const substackUrl =
         </div>
 
         <!-- Polymathy -->
-        <div class="group bg-white dark:bg-emerald-950/40 rounded-2xl p-8 border border-emerald-100 dark:border-emerald-800/50 hover:border-emerald-200 dark:hover:border-emerald-700 transition-all hover:shadow-lg">
+        <div class="group bg-white dark:bg-emerald-950/40 rounded-2xl p-8 border border-emerald-100 dark:border-emerald-800/50 hover:border-emerald-300 dark:hover:border-emerald-600 transition-all hover:shadow-xl hover:-translate-y-1">
           <div class="w-14 h-14 rounded-xl bg-emerald-100 dark:bg-emerald-900/40 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
             <svg class="h-7 w-7 text-emerald-600 dark:text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
@@ -125,34 +145,40 @@ const substackUrl =
             The power of cross-domain expertise. How connecting ideas from different fields creates unique insights and innovative solutions.
           </p>
         </div>
-      </div>
+      </AnimateOnScroll>
     </div>
   </section>
 
   <!-- Future Products Section -->
   <section class="py-20 bg-white dark:bg-emerald-950/20">
     <div class="mx-auto max-w-6xl px-4">
-      <div class="text-center mb-16">
-        <p class="text-sm font-semibold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider mb-2">
-          Coming Soon
-        </p>
-        <h2 class="text-3xl font-bold text-gray-900 dark:text-white sm:text-4xl">
-          Future Products
-        </h2>
-        <p class="mt-4 text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+      <AnimateOnScroll type="slide-up">
+        <div class="text-center">
+          <p class="text-sm font-semibold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider mb-2">
+            Coming Soon
+          </p>
+          <h2 class="text-3xl font-bold text-gray-900 dark:text-white sm:text-4xl">
+            Future Products
+          </h2>
+        </div>
+      </AnimateOnScroll>
+
+      <AnimateOnScroll type="fade" delay={100}>
+        <p class="mt-4 mb-16 text-center text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
           I'm working on resources to help you accelerate your learning journey. Join the newsletter to be the first to know.
         </p>
-      </div>
+      </AnimateOnScroll>
 
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <!-- Software Card -->
-        <div class="relative group overflow-hidden bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20 rounded-2xl p-8 lg:p-10 border border-emerald-100 dark:border-emerald-800/30">
+        <AnimateOnScroll delay={0} type="slide-up">
+        <div class="relative group overflow-hidden bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20 rounded-2xl p-8 lg:p-10 border border-emerald-100 dark:border-emerald-800/30 hover:border-emerald-300 dark:hover:border-emerald-600 transition-all hover:shadow-xl hover:-translate-y-1">
           <div class="absolute top-4 right-4">
             <span class="font-builder inline-flex items-center px-3 py-1 rounded-full font-medium bg-emerald-100 dark:bg-emerald-800/40 text-emerald-700 dark:text-emerald-300">
-              WOrk in Progress
+              Work in Progress
             </span>
           </div>
-          <div class="w-16 h-16 rounded-2xl bg-emerald-100 dark:bg-emerald-800/40 flex items-center justify-center mb-6">
+          <div class="w-16 h-16 rounded-2xl bg-emerald-100 dark:bg-emerald-800/40 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
             <svg class="h-8 w-8 text-emerald-600 dark:text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
             </svg>
@@ -176,15 +202,17 @@ const substackUrl =
             </li>
           </ul>
         </div>
+        </AnimateOnScroll>
 
         <!-- E-Books Card -->
-        <div class="relative group overflow-hidden bg-gradient-to-br from-emerald-50 to-green-50 dark:from-emerald-900/20 dark:to-green-900/20 rounded-2xl p-8 lg:p-10 border border-emerald-100 dark:border-emerald-800/30">
+        <AnimateOnScroll delay={150} type="slide-up">
+        <div class="relative group overflow-hidden bg-gradient-to-br from-emerald-50 to-green-50 dark:from-emerald-900/20 dark:to-green-900/20 rounded-2xl p-8 lg:p-10 border border-emerald-100 dark:border-emerald-800/30 hover:border-emerald-300 dark:hover:border-emerald-600 transition-all hover:shadow-xl hover:-translate-y-1">
           <div class="absolute top-4 right-4">
             <span class="font-builder inline-flex items-center px-3 py-1 rounded-full font-medium bg-emerald-200/80 dark:bg-emerald-700/40 text-emerald-800 dark:text-emerald-200">
               In Development
             </span>
           </div>
-          <div class="w-16 h-16 rounded-2xl bg-emerald-200/60 dark:bg-emerald-700/40 flex items-center justify-center mb-6">
+          <div class="w-16 h-16 rounded-2xl bg-emerald-200/60 dark:bg-emerald-700/40 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
             <svg class="h-8 w-8 text-emerald-600 dark:text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
             </svg>
@@ -214,35 +242,52 @@ const substackUrl =
             </li>
           </ul>
         </div>
+        </AnimateOnScroll>
       </div>
     </div>
   </section>
 
   <!-- Call to Action Section -->
   <section class="py-20 bg-emerald-800 dark:bg-emerald-950">
-    <div class="mx-auto max-w-4xl px-4 text-center">
-      <h2 class="text-3xl font-bold text-white sm:text-4xl mb-6">
-        Ready to Level Up Your Learning?
-      </h2>
-      <p class="text-lg text-emerald-100 mb-10 max-w-2xl mx-auto">
-        Join the newsletter for weekly insights on learning, self-improvement, and building expertise across multiple domains. No spam, just actionable ideas.
-      </p>
-      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-        <a
-          href={substackUrl}
-          class="font-jetbrains-mono w-full sm:w-auto rounded-xl bg-white px-8 py-4 text-base font-semibold text-emerald-800 shadow-lg hover:bg-emerald-50 transition-all hover:shadow-xl"
-        >
-          Visit My Substack
-        </a>
-        <a
-          href="/about"
-          class="font-jetbrains-mono w-full sm:w-auto rounded-xl border-2 border-emerald-400 px-8 py-4 text-base font-semibold text-white hover:border-emerald-300 hover:bg-emerald-700/50 transition-all"
-        >
-          Learn More About Me
-        </a>
+    <AnimateOnScroll type="fade">
+      <div class="mx-auto max-w-4xl px-4 text-center">
+        <h2 class="text-3xl font-bold text-white sm:text-4xl mb-6">
+          Ready to Level Up Your Learning?
+        </h2>
+        <p class="text-lg text-emerald-100 mb-10 max-w-2xl mx-auto">
+          Join the newsletter for weekly insights on learning, self-improvement, and building expertise across multiple domains. No spam, just actionable ideas.
+        </p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a
+            href={substackUrl}
+            class="font-jetbrains-mono w-full sm:w-auto rounded-xl bg-white px-8 py-4 text-base font-semibold text-emerald-800 shadow-lg hover:bg-emerald-50 transition-all duration-200 hover:shadow-xl hover:scale-[1.02] active:scale-[0.98]"
+          >
+            Visit My Substack
+          </a>
+          <a
+            href="/about"
+            class="font-jetbrains-mono w-full sm:w-auto rounded-xl border-2 border-emerald-400 px-8 py-4 text-base font-semibold text-white hover:border-emerald-300 hover:bg-emerald-700/50 transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]"
+          >
+            Learn More About Me
+          </a>
+        </div>
       </div>
-    </div>
+    </AnimateOnScroll>
   </section>
+
+  <script>
+    import { initAnimations, destroyAnimations } from '@scripts/animations';
+    initAnimations();
+
+    const LISTENER_KEY = '__astroAnimationsListenerRegistered';
+    if (!window[LISTENER_KEY]) {
+      window[LISTENER_KEY] = true;
+      document.addEventListener('astro:after-swap', () => {
+        destroyAnimations();
+        initAnimations();
+      });
+    }
+  </script>
 </BaseLayout>
 
 <style>
