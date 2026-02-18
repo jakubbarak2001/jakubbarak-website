@@ -212,8 +212,8 @@
   }
 
   .animate-on-scroll[data-animation-stagger] > .animate-triggered {
-    opacity: 1;
-    transform: translateY(0);
+    opacity: 1 !important;
+    transform: translateY(0) !important;
   }
 
   .animate-on-load {
