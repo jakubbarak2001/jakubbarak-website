@@ -287,7 +287,7 @@
 
   .neumorphic {
     @apply backdrop-blur-sm;
-    @apply bg-white/80 dark:bg-emerald-950/60;
+    @apply bg-white/80 dark:bg-emerald-950/80;
     @apply shadow-[inset_0_2px_4px_rgba(0,0,0,0.1)];
   }
 }
